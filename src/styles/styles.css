@@ -1,0 +1,76 @@
+.extrusora-n {
+  margin-top: 15px;
+  margin-bottom: 25px;
+}
+.diametro-externo {
+  margin-top: 25px;
+  margin-bottom: 15px;
+}
+
+
+.material__container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding: 20px;
+  border: 1px solid #aaa;
+  margin-bottom: 25px;
+}
+.material__type {
+  width: 33%;
+  margin: 5px;
+}
+
+
+.temperaturas {
+  margin: 25px 0;
+  text-align: center;
+}
+.zona {
+  display: flex;
+  align-items: center;
+  border: 1px solid #aaa;
+}
+.zona:first-child:not() {
+  border-top: none;
+}
+.zona__label {
+  width: 50%;
+  padding: 10px 0;
+  border-right: 1px solid #aaa;
+}
+.zona__input {
+  width: 50%;
+  padding: 0 10px;
+  border: none;
+  outline: none;
+  text-align: center;
+}
+
+
+.controle-de-processo {
+  margin: 25px 0;
+  text-align: center;
+}
+.controle {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 70px;
+  border: 1px solid #aaa;
+}
+.controle__label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50%;
+  border-bottom: 1px solid #aaa;
+  font-size: 12px;
+}
+.controle__input {
+  height: 50%;
+  padding: 0 20px;
+  border: none;
+  outline: none;
+  text-align: center;
+}
