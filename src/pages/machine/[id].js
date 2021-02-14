@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router'
-import Link from 'next/link';
-import { Add } from '@material-ui/icons';
+import { Add, ArrowBack } from '@material-ui/icons';
 
 import AddSettingsModal from '../../components/AddSettingsModal';
 
@@ -9,7 +8,7 @@ import { Title, Line } from '../../styles/globalElements';
 import { Container, CreateSettingButton } from './styles';
 
 const Machine = () => {
-	const { query } = useRouter();
+	const { query, push } = useRouter();
 	const { id } = query;
 
 	const [folders, setFolders] = useState([]);
@@ -17,6 +16,10 @@ const Machine = () => {
 
 	return (
 		<Container>
+			<ArrowBack
+				style={{ position: 'absolute', left: 10, top: 15 }}
+				onClick={() => push('/')}
+			/>
 			{settingsModal && <AddSettingsModal setSettingsModal={setSettingsModal} />}
 			<Title>Máquina {id}</Title>
 

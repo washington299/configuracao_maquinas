@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router'
 import Link from 'next/link';
+import { ArrowBack } from '@material-ui/icons';
 
 import { formatSlugToString } from '../../../helpers/parsers';
 
@@ -19,7 +20,7 @@ import Container, {
 } from './styles';
 
 const Machine = () => {
-  const { query } = useRouter();
+  const { query, push } = useRouter();
   const { slug } = query;
 
 	const [extrusora, setExtrusora] = useState('');
@@ -85,207 +86,211 @@ const Machine = () => {
 
 	return (
     <Container>
-    <Title>{formatSlugToString(slug)}</Title>
-    <Extrusora>
-			<Label htmlFor="extrusora_n">Extrusora nº:</Label>
-			<Input
-				type="number"
-				id="extrusora_n"
-				value={extrusora}
-				onChange={(e) => setExtrusora(e.target.value)}
+			<ArrowBack
+				style={{ position: 'absolute', left: 10, top: 15 }}
+				onClick={() => push('/')}
 			/>
-    </Extrusora>
+			<Title>{formatSlugToString(slug)}</Title>
+			<Extrusora>
+				<Label htmlFor="extrusora_n">Extrusora nº:</Label>
+				<Input
+					type="number"
+					id="extrusora_n"
+					value={extrusora}
+					onChange={(e) => setExtrusora(e.target.value)}
+				/>
+			</Extrusora>
 
-    <hr />
+			<hr />
 
-    <Diametro>
-			<Label htmlFor="diametro_externo">Diâmetro externo <SmallText>(mm)</SmallText>:</Label>
-			<br />
-			<Input
-				type="number"
-				id="diametro_externo"
-				value={diametro}
-				onChange={(e) => setDiametro(e.target.value)}
-			/>
-    </Diametro>
-    <div>
-      <Label>Material:</Label>
+			<Diametro>
+				<Label htmlFor="diametro_externo">Diâmetro externo <SmallText>(mm)</SmallText>:</Label>
+				<br />
+				<Input
+					type="number"
+					id="diametro_externo"
+					value={diametro}
+					onChange={(e) => setDiametro(e.target.value)}
+				/>
+			</Diametro>
+			<div>
+				<Label>Material:</Label>
 
-      <br/>
+				<br/>
 
-      <Material className="material__container">
-				<div className="material__type">
-					<Input
-						type="checkbox"
-						checked={materialCheck === 'PPN'}
-						id="PPN"
-						name="ppn"
-						value="PPN"
-						onChange={() => setMaterialCheck(materialCheck === 'PPN' ? '' : 'PPN')}
-					/>
-					<Label htmlFor="PPN">PPN</Label>
+				<Material className="material__container">
+					<div className="material__type">
+						<Input
+							type="checkbox"
+							checked={materialCheck === 'PPN'}
+							id="PPN"
+							name="ppn"
+							value="PPN"
+							onChange={() => setMaterialCheck(materialCheck === 'PPN' ? '' : 'PPN')}
+						/>
+						<Label htmlFor="PPN">PPN</Label>
+					</div>
+					<div className="material__type">
+						<Input
+							type="checkbox"
+							checked={materialCheck === 'PPP'}
+							id="PPP"
+							name="ppp"
+							value="PPP"
+							onChange={() => setMaterialCheck(materialCheck === 'PPP' ? '' : 'PPP')}
+						/>
+						<Label htmlFor="PPP">PPP</Label>
+					</div>
+					<div className="material__type">
+						<Input
+							type="checkbox"
+							checked={materialCheck === 'PPZ'}
+							id="PPZ"
+							name="ppz"
+							value="PPZ"
+							onChange={() => setMaterialCheck(materialCheck === 'PPZ' ? '' : 'PPZ')}
+						/>
+						<Label htmlFor="PPZ">PPZ</Label>
+					</div>
+					<div className="material__type">
+						<Input
+							type="checkbox"
+							checked={materialCheck === 'PEADN'}
+							id="PEADN"
+							name="peadn"
+							value="PEADN"
+							onChange={() => setMaterialCheck(materialCheck === 'PEADN' ? '' : 'PEADN')}
+						/>
+						<Label htmlFor="PEADN">PEADN</Label>
+					</div>
+					<div className="material__type">
+						<Input
+							type="checkbox"
+							checked={materialCheck === 'PEADP'}
+							id="PEADP"
+							name="peadp"
+							value="PEADP"
+							onChange={() => setMaterialCheck(materialCheck === 'PEADP' ? '' : 'PEADP')}
+						/>
+						<Label htmlFor="PEADP">PEADP</Label>
+					</div>
+					<div className="material__type">
+						<Input
+							type="checkbox"
+							checked={materialCheck === 'OUTROS'}
+							d="OUTROS"
+							name="outros"
+							value="OUTROS"
+							onChange={() => setMaterialCheck(materialCheck === 'OUTROS' ? '' : 'OUTROS')}
+						/>
+						<Label htmlFor="OUTROS">OUTROS</Label>
+					</div>
+				</Material>
+			</div>
+
+    	<hr />
+
+			<Temperatura>
+				<Label>Temperaturas <SmallText>(°c)</SmallText></Label>
+				<br />
+				<br />
+				<div className="zona">
+					<ZonaLabel htmlFor="zona-1">zona-1</ZonaLabel>
+					<ZonaInput type="text" id="zona-1" value={zona1} onChange={(e) => setZona1(e.target.value)} />
 				</div>
-				<div className="material__type">
-					<Input
-						type="checkbox"
-						checked={materialCheck === 'PPP'}
-						id="PPP"
-						name="ppp"
-						value="PPP"
-						onChange={() => setMaterialCheck(materialCheck === 'PPP' ? '' : 'PPP')}
-					/>
-					<Label htmlFor="PPP">PPP</Label>
+				<div className="zona">
+					<ZonaLabel htmlFor="zona-2">zona-2</ZonaLabel>
+					<ZonaInput type="text" id="zona-2" value={zona2} onChange={(e) => setZona2(e.target.value)} />
 				</div>
-				<div className="material__type">
-					<Input
-						type="checkbox"
-						checked={materialCheck === 'PPZ'}
-						id="PPZ"
-						name="ppz"
-						value="PPZ"
-						onChange={() => setMaterialCheck(materialCheck === 'PPZ' ? '' : 'PPZ')}
-					/>
-					<Label htmlFor="PPZ">PPZ</Label>
+				<div className="zona">
+					<ZonaLabel htmlFor="zona-3">zona-3</ZonaLabel>
+					<ZonaInput type="text" id="zona-3" value={zona3} onChange={(e) => setZona3(e.target.value)} />
 				</div>
-				<div className="material__type">
-					<Input
-						type="checkbox"
-						checked={materialCheck === 'PEADN'}
-						id="PEADN"
-						name="peadn"
-						value="PEADN"
-						onChange={() => setMaterialCheck(materialCheck === 'PEADN' ? '' : 'PEADN')}
-					/>
-					<Label htmlFor="PEADN">PEADN</Label>
+				<div className="zona">
+					<ZonaLabel htmlFor="zona-4">zona-4</ZonaLabel>
+					<ZonaInput type="text" id="zona-4" value={zona4} onChange={(e) => setZona4(e.target.value)} />
 				</div>
-				<div className="material__type">
-					<Input
-						type="checkbox"
-						checked={materialCheck === 'PEADP'}
-						id="PEADP"
-						name="peadp"
-						value="PEADP"
-						onChange={() => setMaterialCheck(materialCheck === 'PEADP' ? '' : 'PEADP')}
-					/>
-					<Label htmlFor="PEADP">PEADP</Label>
+				<div className="zona">
+					<ZonaLabel htmlFor="zona-5">zona-5</ZonaLabel>
+					<ZonaInput type="text" id="zona-5" value={zona5} onChange={(e) => setZona5(e.target.value)} />
 				</div>
-				<div className="material__type">
-					<Input
-						type="checkbox"
-						checked={materialCheck === 'OUTROS'}
-						d="OUTROS"
-						name="outros"
-						value="OUTROS"
-						onChange={() => setMaterialCheck(materialCheck === 'OUTROS' ? '' : 'OUTROS')}
-					/>
-					<Label htmlFor="OUTROS">OUTROS</Label>
+				<div className="zona">
+					<ZonaLabel htmlFor="zona-6">zona-6</ZonaLabel>
+					<ZonaInput type="text" id="zona-6" value={zona6} onChange={(e) => setZona6(e.target.value)} />
 				</div>
-      </Material>
-    </div>
+			</Temperatura>
 
-    <hr />
+			<hr />
 
-    <Temperatura>
-      <Label>Temperaturas <SmallText>(°c)</SmallText></Label>
-      <br />
-      <br />
-      <div className="zona">
-				<ZonaLabel htmlFor="zona-1">zona-1</ZonaLabel>
-				<ZonaInput type="text" id="zona-1" value={zona1} onChange={(e) => setZona1(e.target.value)} />
-      </div>
-      <div className="zona">
-				<ZonaLabel htmlFor="zona-2">zona-2</ZonaLabel>
-				<ZonaInput type="text" id="zona-2" value={zona2} onChange={(e) => setZona2(e.target.value)} />
-      </div>
-      <div className="zona">
-				<ZonaLabel htmlFor="zona-3">zona-3</ZonaLabel>
-				<ZonaInput type="text" id="zona-3" value={zona3} onChange={(e) => setZona3(e.target.value)} />
-      </div>
-      <div className="zona">
-				<ZonaLabel htmlFor="zona-4">zona-4</ZonaLabel>
-				<ZonaInput type="text" id="zona-4" value={zona4} onChange={(e) => setZona4(e.target.value)} />
-      </div>
-      <div className="zona">
-				<ZonaLabel htmlFor="zona-5">zona-5</ZonaLabel>
-				<ZonaInput type="text" id="zona-5" value={zona5} onChange={(e) => setZona5(e.target.value)} />
-      </div>
-      <div className="zona">
-				<ZonaLabel htmlFor="zona-6">zona-6</ZonaLabel>
-				<ZonaInput type="text" id="zona-6" value={zona6} onChange={(e) => setZona6(e.target.value)} />
-      </div>
-    </Temperatura>
+			<Controle>
+				<Label>Controle de processo</Label>
 
-    <hr />
+				<br />
+				<br />
 
-    <Controle>
-      <Label>Controle de processo</Label>
+				<div className="controle">
+					<ControleLabel htmlFor="velocidade_da_rosca">velocidade da rosca &nbsp;<SmallText>(rpm)</SmallText></ControleLabel>
+					<ControleInput
+						type="text"
+						id="velocidade_da_rosca"
+						value={velocidade_da_rosca}
+						onChange={(e) => setVelocidade_da_rosca(e.target.value)}
+					/>
+				</div>
+				<div className="controle">
+					<ControleLabel htmlFor="amperagem_da_rosca">amperagem da rosca &nbsp;<SmallText>(A)</SmallText></ControleLabel>
+					<ControleInput
+						type="text"
+						id="amperagem_da_rosca"
+						value={amperagem_da_rosca}
+						onChange={(e) => setAmperagem_da_rosca(e.target.value)}
+					/>
+				</div>
+				<div className="controle">
+					<ControleLabel htmlFor="pressao_do_material">pressão do material na saída da rosca &nbsp;<SmallText>(bar)</SmallText></ControleLabel>
+					<ControleInput
+						type="text"
+						id="pressao_do_material"
+						value={pressao_do_material}
+						onChange={(e) => setPressao_do_material(e.target.value)}
+					/>
+				</div>
+				<div className="controle">
+					<ControleLabel htmlFor="pressao_do_freio">pressão do freio &nbsp;<SmallText>(bar)</SmallText></ControleLabel>
+					<ControleInput
+						type="text"
+						id="pressao_do_freio"
+						value={pressao_do_freio}
+						onChange={(e) => setPressao_do_freio(e.target.value)}
+					/>
+				</div>
+				<div className="controle">
+					<ControleLabel htmlFor="temperatura_da_agua">temperatura da água &nbsp;<SmallText>(°c)</SmallText></ControleLabel>
+					<ControleInput
+						type="text"
+						id="temperatura_da_agua"
+						value={temperatura_da_agua}
+						onChange={(e) => setTemperatura_da_agua(e.target.value)}
+					/>
+				</div>
+				<div className="controle">
+					<ControleLabel htmlFor="producao">produção &nbsp;<SmallText>(kg/hora)</SmallText></ControleLabel>
+					<ControleInput
+						type="text"
+						id="producao"
+						value={producao}
+						onChange={(e) => setProducao(e.target.value)}
+					/>
+				</div>
+			</Controle>
 
-      <br />
-      <br />
-
-      <div className="controle">
-        <ControleLabel htmlFor="velocidade_da_rosca">velocidade da rosca &nbsp;<SmallText>(rpm)</SmallText></ControleLabel>
-        <ControleInput
-          type="text"
-          id="velocidade_da_rosca"
-          value={velocidade_da_rosca}
-          onChange={(e) => setVelocidade_da_rosca(e.target.value)}
-        />
-      </div>
-      <div className="controle">
-        <ControleLabel htmlFor="amperagem_da_rosca">amperagem da rosca &nbsp;<SmallText>(A)</SmallText></ControleLabel>
-        <ControleInput
-          type="text"
-          id="amperagem_da_rosca"
-          value={amperagem_da_rosca}
-          onChange={(e) => setAmperagem_da_rosca(e.target.value)}
-        />
-      </div>
-      <div className="controle">
-        <ControleLabel htmlFor="pressao_do_material">pressão do material na saída da rosca &nbsp;<SmallText>(bar)</SmallText></ControleLabel>
-        <ControleInput
-          type="text"
-          id="pressao_do_material"
-          value={pressao_do_material}
-          onChange={(e) => setPressao_do_material(e.target.value)}
-        />
-      </div>
-      <div className="controle">
-        <ControleLabel htmlFor="pressao_do_freio">pressão do freio &nbsp;<SmallText>(bar)</SmallText></ControleLabel>
-        <ControleInput
-          type="text"
-          id="pressao_do_freio"
-          value={pressao_do_freio}
-          onChange={(e) => setPressao_do_freio(e.target.value)}
-        />
-      </div>
-      <div className="controle">
-        <ControleLabel htmlFor="temperatura_da_agua">temperatura da água &nbsp;<SmallText>(°c)</SmallText></ControleLabel>
-        <ControleInput
-          type="text"
-          id="temperatura_da_agua"
-          value={temperatura_da_agua}
-          onChange={(e) => setTemperatura_da_agua(e.target.value)}
-        />
-      </div>
-      <div className="controle">
-        <ControleLabel htmlFor="producao">produção &nbsp;<SmallText>(kg/hora)</SmallText></ControleLabel>
-        <ControleInput
-          type="text"
-          id="producao"
-          value={producao}
-          onChange={(e) => setProducao(e.target.value)}
-        />
-      </div>
-    </Controle>
-
-    <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-      <Link href="/">
-        <SaveButton onClick={handleClick}>Salvar</SaveButton>
-      </Link>
-    </div>
-  </Container>
-  )
+			<div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+				<Link href="/">
+					<SaveButton onClick={handleClick}>Salvar</SaveButton>
+				</Link>
+			</div>
+		</Container>
+  );
 }
 
 export default Machine
