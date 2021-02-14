@@ -4,7 +4,6 @@ export const createSlugBasedOnString = (value) => {
 };
 
 export const formatSlugToString = (value) => {
-	console.log(value);
 	const slug = value.replaceAll('-', ' ');
 	return slug;
 };
