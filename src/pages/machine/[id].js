@@ -3,6 +3,8 @@ import { useRouter } from 'next/router'
 import Link from 'next/link';
 import { Add } from '@material-ui/icons';
 
+import AddSettingsModal from '../../components/AddSettingsModal';
+
 import { Title, Line } from '../../styles/globalElements';
 import { Container, CreateSettingButton } from './styles';
 
@@ -11,12 +13,14 @@ const Machine = () => {
 	const { id } = query;
 
 	const [folders, setFolders] = useState([]);
+	const [settingsModal, setSettingsModal] = useState(false);
 
 	return (
 		<Container>
+			{settingsModal && <AddSettingsModal setSettingsModal={setSettingsModal} />}
 			<Title>Máquina {id}</Title>
 
-			<CreateSettingButton>
+			<CreateSettingButton onClick={() => setSettingsModal(true)}>
 				Criar nova configuração
 				<Add />
 			</CreateSettingButton>
@@ -26,10 +30,6 @@ const Machine = () => {
 			<h2>Configurações</h2>
 
 			{folders.length === 0 && <span>Nenhuma configuração encontrada.</span>}
-
-			<Link href={`/machine/${id}/settings/`}>
-					<a>Machine {id}</a>
-			</Link>
 		</Container>
 	);
 }
