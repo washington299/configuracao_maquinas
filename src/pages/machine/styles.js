@@ -16,7 +16,7 @@ export const CreateSettingButton = styled(Button)`
 	margin-left: 0;
 	margin-bottom: 20px;
 	padding: 5px 10px;
-	background-color: #ccc;
+	background-color: #eee;
 
 	svg {
 		font-size: 24px;
