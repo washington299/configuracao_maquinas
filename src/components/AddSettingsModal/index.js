@@ -1,15 +1,11 @@
 import React, { useState } from 'react';
-import { useRouter } from 'next/router';
 import { Settings, Close } from '@material-ui/icons';
-
-import { createSlugBasedOnString } from '../../helpers/parsers';
 
 import { Container, CreateButton, ModalBox, ModalInput } from './styles';
 
-const AddSettingsModal = ({ setSettingsModal }) => {
+const AddSettingsModal = ({ setSettingsModal, folders, setFolders }) => {
 	const [title, setTitle] = useState('');
 	const [error, setError] = useState('');
-	const history = useRouter();
 
 	const createConfig = () => {
 		if (!title) {
@@ -21,8 +17,8 @@ const AddSettingsModal = ({ setSettingsModal }) => {
 			return;
 		}
 
-		const slug = createSlugBasedOnString(title);
-		history.push(`/machine/settings/${slug}`);
+		setFolders(folders.concat({ id: folders.length + 1, title }));
+		setSettingsModal(false);
 	};
 
 	return (
