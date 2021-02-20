@@ -22,3 +22,19 @@ export const CreateSettingButton = styled(Button)`
 		font-size: 24px;
 	}
 `;
+
+export const Folder = styled.div`
+	width: 80%;
+	display: flex;
+	align-items: center;
+	margin-bottom: 30px;
+	padding: 10px;
+	box-shadow: 0px 3px 10px #00000029;
+	word-break: break-all;
+	cursor: pointer;
+
+	svg {
+		vertical-align: middle;
+		margin-left: 5px;
+	}
+`;
