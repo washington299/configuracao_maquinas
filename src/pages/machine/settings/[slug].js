@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { ArrowBack } from '@material-ui/icons';
 
@@ -7,89 +7,89 @@ import { formatSlugToString } from '../../../helpers/parsers';
 
 import { Title, Label, Input, SmallText } from '../../../styles/globalElements';
 import Container, {
-  Extrusora,
-  Diametro,
-  Material,
-  Temperatura,
-  Controle,
-  ZonaLabel,
-  ZonaInput,
-  ControleLabel,
-  ControleInput,
-  SaveButton,
+	Extrusora,
+	Diametro,
+	Material,
+	Temperatura,
+	Controle,
+	ZonaLabel,
+	ZonaInput,
+	ControleLabel,
+	ControleInput,
+	SaveButton,
 } from './styles';
 
 const Machine = () => {
-  const { query, push } = useRouter();
-  const { slug } = query;
+	const { query, push } = useRouter();
+	const { slug } = query;
 
 	const [extrusora, setExtrusora] = useState('');
-  const [diametro, setDiametro] = useState('');
-  const [materialCheck, setMaterialCheck] = useState('');
-  const [zona1, setZona1] = useState('');
-  const [zona2, setZona2] = useState('');
-  const [zona3, setZona3] = useState('');
-  const [zona4, setZona4] = useState('');
-  const [zona5, setZona5] = useState('');
-  const [zona6, setZona6] = useState('');
-  const [velocidade_da_rosca, setVelocidade_da_rosca] = useState('');
-  const [amperagem_da_rosca, setAmperagem_da_rosca] = useState('');
-  const [pressao_do_material, setPressao_do_material] = useState('');
-  const [pressao_do_freio, setPressao_do_freio] = useState('');
-  const [temperatura_da_agua, setTemperatura_da_agua] = useState('');
-  const [producao, setProducao] = useState('');
+	const [diametro, setDiametro] = useState('');
+	const [materialCheck, setMaterialCheck] = useState('');
+	const [zona1, setZona1] = useState('');
+	const [zona2, setZona2] = useState('');
+	const [zona3, setZona3] = useState('');
+	const [zona4, setZona4] = useState('');
+	const [zona5, setZona5] = useState('');
+	const [zona6, setZona6] = useState('');
+	const [velocidade_da_rosca, setVelocidade_da_rosca] = useState('');
+	const [amperagem_da_rosca, setAmperagem_da_rosca] = useState('');
+	const [pressao_do_material, setPressao_do_material] = useState('');
+	const [pressao_do_freio, setPressao_do_freio] = useState('');
+	const [temperatura_da_agua, setTemperatura_da_agua] = useState('');
+	const [producao, setProducao] = useState('');
 
-  useEffect(() => {
-    let data = localStorage.getItem(`machine ${slug}`);
+	useEffect(() => {
+		let data = localStorage.getItem(`machine ${slug}`);
 
-    if (data) {
-      data = JSON.parse(data);
-    } else {
-      data = '';
-    }
+		if (data) {
+			data = JSON.parse(data);
+		} else {
+			data = '';
+		}
 
-    setExtrusora(data.extrusora);
-    setDiametro(data.diametro);
-    setMaterialCheck(data.materialCheck);
-    setZona1(data.zona1);
-    setZona2(data.zona2);
-    setZona3(data.zona3);
-    setZona4(data.zona4);
-    setZona5(data.zona5);
-    setZona6(data.zona6);
-    setVelocidade_da_rosca(data.velocidade_da_rosca);
-    setAmperagem_da_rosca(data.amperagem_da_rosca);
-    setPressao_do_material(data.pressao_do_material);
-    setPressao_do_freio(data.pressao_do_freio);
-    setTemperatura_da_agua(data.temperatura_da_agua);
-    setProducao(data.producao);
-  }, []);
+		setExtrusora(data.extrusora);
+		setDiametro(data.diametro);
+		setMaterialCheck(data.materialCheck);
+		setZona1(data.zona1);
+		setZona2(data.zona2);
+		setZona3(data.zona3);
+		setZona4(data.zona4);
+		setZona5(data.zona5);
+		setZona6(data.zona6);
+		setVelocidade_da_rosca(data.velocidade_da_rosca);
+		setAmperagem_da_rosca(data.amperagem_da_rosca);
+		setPressao_do_material(data.pressao_do_material);
+		setPressao_do_freio(data.pressao_do_freio);
+		setTemperatura_da_agua(data.temperatura_da_agua);
+		setProducao(data.producao);
+	}, []);
 
-  const handleClick = () => {
-    localStorage.setItem(`machine ${slug}`, JSON.stringify({
-      extrusora,
-      diametro,
-      zona1,
-      zona2,
-      zona3,
-      zona4,
-      zona5,
-      zona6,
-      velocidade_da_rosca,
-      amperagem_da_rosca,
-      pressao_do_material,
-      pressao_do_freio,
-      temperatura_da_agua,
-      producao,
-    }));
-  };
+	const handleClick = () => {
+		localStorage.setItem(
+			`machine ${slug}`,
+			JSON.stringify({
+				extrusora,
+				diametro,
+				zona1,
+				zona2,
+				zona3,
+				zona4,
+				zona5,
+				zona6,
+				velocidade_da_rosca,
+				amperagem_da_rosca,
+				pressao_do_material,
+				pressao_do_freio,
+				temperatura_da_agua,
+				producao,
+			}),
+		);
+	};
 
 	return (
-    <Container>
-			<ArrowBack
-				style={{ position: 'absolute', left: 10, top: 15 }}
-				onClick={() => push('/')}
-			/>
+		<Container>
+			<ArrowBack style={{ position: 'absolute', left: 10, top: 15 }} onClick={() => push('/')} />
 			<Title>{formatSlugToString(slug)}</Title>
 			<Extrusora>
 				<Label htmlFor="extrusora_n">Extrusora nº:</Label>
@@ -97,26 +97,28 @@ const Machine = () => {
 					type="number"
 					id="extrusora_n"
 					value={extrusora}
-					onChange={(e) => setExtrusora(e.target.value)}
+					onChange={e => setExtrusora(e.target.value)}
 				/>
 			</Extrusora>
 
 			<hr />
 
 			<Diametro>
-				<Label htmlFor="diametro_externo">Diâmetro externo <SmallText>(mm)</SmallText>:</Label>
+				<Label htmlFor="diametro_externo">
+					Diâmetro externo <SmallText>(mm)</SmallText>:
+				</Label>
 				<br />
 				<Input
 					type="number"
 					id="diametro_externo"
 					value={diametro}
-					onChange={(e) => setDiametro(e.target.value)}
+					onChange={e => setDiametro(e.target.value)}
 				/>
 			</Diametro>
 			<div>
 				<Label>Material:</Label>
 
-				<br/>
+				<br />
 
 				<Material className="material__container">
 					<div className="material__type">
@@ -188,35 +190,67 @@ const Machine = () => {
 				</Material>
 			</div>
 
-    	<hr />
+			<hr />
 
 			<Temperatura>
-				<Label>Temperaturas <SmallText>(°c)</SmallText></Label>
+				<Label>
+					Temperaturas <SmallText>(°c)</SmallText>
+				</Label>
 				<br />
 				<br />
 				<div className="zona">
 					<ZonaLabel htmlFor="zona-1">zona-1</ZonaLabel>
-					<ZonaInput type="text" id="zona-1" value={zona1} onChange={(e) => setZona1(e.target.value)} />
+					<ZonaInput
+						type="text"
+						id="zona-1"
+						value={zona1}
+						onChange={e => setZona1(e.target.value)}
+					/>
 				</div>
 				<div className="zona">
 					<ZonaLabel htmlFor="zona-2">zona-2</ZonaLabel>
-					<ZonaInput type="text" id="zona-2" value={zona2} onChange={(e) => setZona2(e.target.value)} />
+					<ZonaInput
+						type="text"
+						id="zona-2"
+						value={zona2}
+						onChange={e => setZona2(e.target.value)}
+					/>
 				</div>
 				<div className="zona">
 					<ZonaLabel htmlFor="zona-3">zona-3</ZonaLabel>
-					<ZonaInput type="text" id="zona-3" value={zona3} onChange={(e) => setZona3(e.target.value)} />
+					<ZonaInput
+						type="text"
+						id="zona-3"
+						value={zona3}
+						onChange={e => setZona3(e.target.value)}
+					/>
 				</div>
 				<div className="zona">
 					<ZonaLabel htmlFor="zona-4">zona-4</ZonaLabel>
-					<ZonaInput type="text" id="zona-4" value={zona4} onChange={(e) => setZona4(e.target.value)} />
+					<ZonaInput
+						type="text"
+						id="zona-4"
+						value={zona4}
+						onChange={e => setZona4(e.target.value)}
+					/>
 				</div>
 				<div className="zona">
 					<ZonaLabel htmlFor="zona-5">zona-5</ZonaLabel>
-					<ZonaInput type="text" id="zona-5" value={zona5} onChange={(e) => setZona5(e.target.value)} />
+					<ZonaInput
+						type="text"
+						id="zona-5"
+						value={zona5}
+						onChange={e => setZona5(e.target.value)}
+					/>
 				</div>
 				<div className="zona">
 					<ZonaLabel htmlFor="zona-6">zona-6</ZonaLabel>
-					<ZonaInput type="text" id="zona-6" value={zona6} onChange={(e) => setZona6(e.target.value)} />
+					<ZonaInput
+						type="text"
+						id="zona-6"
+						value={zona6}
+						onChange={e => setZona6(e.target.value)}
+					/>
 				</div>
 			</Temperatura>
 
@@ -229,57 +263,69 @@ const Machine = () => {
 				<br />
 
 				<div className="controle">
-					<ControleLabel htmlFor="velocidade_da_rosca">velocidade da rosca &nbsp;<SmallText>(rpm)</SmallText></ControleLabel>
+					<ControleLabel htmlFor="velocidade_da_rosca">
+						velocidade da rosca &nbsp;<SmallText>(rpm)</SmallText>
+					</ControleLabel>
 					<ControleInput
 						type="text"
 						id="velocidade_da_rosca"
 						value={velocidade_da_rosca}
-						onChange={(e) => setVelocidade_da_rosca(e.target.value)}
+						onChange={e => setVelocidade_da_rosca(e.target.value)}
 					/>
 				</div>
 				<div className="controle">
-					<ControleLabel htmlFor="amperagem_da_rosca">amperagem da rosca &nbsp;<SmallText>(A)</SmallText></ControleLabel>
+					<ControleLabel htmlFor="amperagem_da_rosca">
+						amperagem da rosca &nbsp;<SmallText>(A)</SmallText>
+					</ControleLabel>
 					<ControleInput
 						type="text"
 						id="amperagem_da_rosca"
 						value={amperagem_da_rosca}
-						onChange={(e) => setAmperagem_da_rosca(e.target.value)}
+						onChange={e => setAmperagem_da_rosca(e.target.value)}
 					/>
 				</div>
 				<div className="controle">
-					<ControleLabel htmlFor="pressao_do_material">pressão do material na saída da rosca &nbsp;<SmallText>(bar)</SmallText></ControleLabel>
+					<ControleLabel htmlFor="pressao_do_material">
+						pressão do material na saída da rosca &nbsp;<SmallText>(bar)</SmallText>
+					</ControleLabel>
 					<ControleInput
 						type="text"
 						id="pressao_do_material"
 						value={pressao_do_material}
-						onChange={(e) => setPressao_do_material(e.target.value)}
+						onChange={e => setPressao_do_material(e.target.value)}
 					/>
 				</div>
 				<div className="controle">
-					<ControleLabel htmlFor="pressao_do_freio">pressão do freio &nbsp;<SmallText>(bar)</SmallText></ControleLabel>
+					<ControleLabel htmlFor="pressao_do_freio">
+						pressão do freio &nbsp;<SmallText>(bar)</SmallText>
+					</ControleLabel>
 					<ControleInput
 						type="text"
 						id="pressao_do_freio"
 						value={pressao_do_freio}
-						onChange={(e) => setPressao_do_freio(e.target.value)}
+						onChange={e => setPressao_do_freio(e.target.value)}
 					/>
 				</div>
 				<div className="controle">
-					<ControleLabel htmlFor="temperatura_da_agua">temperatura da água &nbsp;<SmallText>(°c)</SmallText></ControleLabel>
+					<ControleLabel htmlFor="temperatura_da_agua">
+						temperatura da água &nbsp;<SmallText>(°c)</SmallText>
+					</ControleLabel>
 					<ControleInput
 						type="text"
 						id="temperatura_da_agua"
 						value={temperatura_da_agua}
-						onChange={(e) => setTemperatura_da_agua(e.target.value)}
+						onChange={e => setTemperatura_da_agua(e.target.value)}
 					/>
 				</div>
 				<div className="controle">
-					<ControleLabel htmlFor="producao">produção &nbsp;<SmallText>(kg/hora)</SmallText></ControleLabel>
+					<ControleLabel htmlFor="producao">
+						produção &nbsp;<SmallText>(kg/hora)</SmallText>
+					</ControleLabel>
 					<ControleInput
 						type="text"
 						id="producao"
 						value={producao}
-						onChange={(e) => setProducao(e.target.value)}
+						onChange={e => setProducao(e.target.value)}
 					/>
 				</div>
 			</Controle>
@@ -290,7 +336,7 @@ const Machine = () => {
 				</Link>
 			</div>
 		</Container>
-  );
-}
+	);
+};
 
-export default Machine
+export default Machine;

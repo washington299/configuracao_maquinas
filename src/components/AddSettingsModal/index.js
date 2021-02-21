@@ -33,10 +33,10 @@ const AddSettingsModal = ({ setSettingsModal, folders, setFolders }) => {
 				</h1>
 				<ModalInput
 					value={title}
-					onChange={(e) => setTitle(e.target.value)}
+					onChange={e => setTitle(e.target.value)}
 					placeholder="Digite um nome para configuração..."
 				/>
-					{error && <span>{error}</span>}
+				{error && <span>{error}</span>}
 				<CreateButton onClick={createConfig}>Criar</CreateButton>
 			</ModalBox>
 		</Container>

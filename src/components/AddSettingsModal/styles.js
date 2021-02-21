@@ -56,6 +56,6 @@ export const ModalInput = styled(Input)`
 export const CreateButton = styled(Button)`
 	align-self: flex-end;
 	margin-top: 15px;
-  color: #ffffff;
-  background-color: #28A745;
+	color: #ffffff;
+	background-color: #28a745;
 `;

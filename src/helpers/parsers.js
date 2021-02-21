@@ -1,9 +1,12 @@
-export const createSlugBasedOnString = (value) => {
-	const slug = value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replaceAll(' ', '-');
+export const createSlugBasedOnString = value => {
+	const slug = value
+		.normalize('NFD')
+		.replace(/[\u0300-\u036f]/g, '')
+		.replaceAll(' ', '-');
 	return slug;
 };
 
-export const formatSlugToString = (value) => {
+export const formatSlugToString = value => {
 	const slug = value.replaceAll('-', ' ');
 	return slug;
 };

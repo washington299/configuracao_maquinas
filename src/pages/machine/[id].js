@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router';
 import { Add, ArrowBack, Settings } from '@material-ui/icons';
 
 import { createSlugBasedOnString } from '../../helpers/parsers';
@@ -16,20 +16,21 @@ const Machine = () => {
 	const [folders, setFolders] = useState([]);
 	const [settingsModal, setSettingsModal] = useState(false);
 
-	const handleClick = (title) => {
+	const handleClick = title => {
 		const slug = createSlugBasedOnString(title);
 		push(`/machine/settings/${slug}`);
 	};
 
 	return (
 		<Container>
-			<ArrowBack
-				style={{ position: 'absolute', left: 10, top: 15 }}
-				onClick={() => push('/')}
-			/>
-			{settingsModal &&
-				<AddSettingsModal setSettingsModal={setSettingsModal} folders={folders} setFolders={setFolders} />
-			}
+			<ArrowBack style={{ position: 'absolute', left: 10, top: 15 }} onClick={() => push('/')} />
+			{settingsModal && (
+				<AddSettingsModal
+					setSettingsModal={setSettingsModal}
+					folders={folders}
+					setFolders={setFolders}
+				/>
+			)}
 			<Title>Máquina {id}</Title>
 
 			<CreateSettingButton onClick={() => setSettingsModal(true)}>
@@ -51,6 +52,6 @@ const Machine = () => {
 			{folders.length === 0 && <span>Nenhuma configuração encontrada.</span>}
 		</Container>
 	);
-}
+};
 
 export default Machine;
