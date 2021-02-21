@@ -1,6 +1,6 @@
 import MachineLinkButton from '../components/MachineLinkButton';
 
-import { Machines } from '../models/machines';
+import { Machines } from '../utils/machines';
 
 import { Title } from '../styles/globalElements';
 import Container from '../styles';
