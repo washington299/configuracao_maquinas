@@ -23,68 +23,42 @@ const Machine = () => {
 	const { query, push } = useRouter();
 	const { slug } = query;
 
-	const [extrusora, setExtrusora] = useState('');
-	const [diametro, setDiametro] = useState('');
-	const [materialCheck, setMaterialCheck] = useState('');
-	const [zona1, setZona1] = useState('');
-	const [zona2, setZona2] = useState('');
-	const [zona3, setZona3] = useState('');
-	const [zona4, setZona4] = useState('');
-	const [zona5, setZona5] = useState('');
-	const [zona6, setZona6] = useState('');
-	const [velocidade_da_rosca, setVelocidade_da_rosca] = useState('');
-	const [amperagem_da_rosca, setAmperagem_da_rosca] = useState('');
-	const [pressao_do_material, setPressao_do_material] = useState('');
-	const [pressao_do_freio, setPressao_do_freio] = useState('');
-	const [temperatura_da_agua, setTemperatura_da_agua] = useState('');
-	const [producao, setProducao] = useState('');
+	const [state, setState] = useState({
+		extrusora: '',
+		diametro: '',
+		materialCheck: '',
+		zona1: '',
+		zona2: '',
+		zona3: '',
+		zona4: '',
+		zona5: '',
+		zona6: '',
+		velocidade_da_rosca: '',
+		amperagem_da_rosca: '',
+		pressao_do_material: '',
+		pressao_do_freio: '',
+		temperatura_da_agua: '',
+		producao: '',
+	});
 
-	useEffect(() => {
-		let data = localStorage.getItem(`machine ${slug}`);
-
-		if (data) {
-			data = JSON.parse(data);
-		} else {
-			data = '';
-		}
-
-		setExtrusora(data.extrusora);
-		setDiametro(data.diametro);
-		setMaterialCheck(data.materialCheck);
-		setZona1(data.zona1);
-		setZona2(data.zona2);
-		setZona3(data.zona3);
-		setZona4(data.zona4);
-		setZona5(data.zona5);
-		setZona6(data.zona6);
-		setVelocidade_da_rosca(data.velocidade_da_rosca);
-		setAmperagem_da_rosca(data.amperagem_da_rosca);
-		setPressao_do_material(data.pressao_do_material);
-		setPressao_do_freio(data.pressao_do_freio);
-		setTemperatura_da_agua(data.temperatura_da_agua);
-		setProducao(data.producao);
-	}, []);
-
-	const handleClick = () => {
-		localStorage.setItem(
-			`machine ${slug}`,
-			JSON.stringify({
-				extrusora,
-				diametro,
-				zona1,
-				zona2,
-				zona3,
-				zona4,
-				zona5,
-				zona6,
-				velocidade_da_rosca,
-				amperagem_da_rosca,
-				pressao_do_material,
-				pressao_do_freio,
-				temperatura_da_agua,
-				producao,
-			}),
-		);
+	const handleClick = async () => {
+		const {
+			amperagem_da_rosca,
+			diametro,
+			extrusora,
+			materialCheck,
+			pressao_do_freio,
+			pressao_do_material,
+			producao,
+			temperatura_da_agua,
+			velocidade_da_rosca,
+			zona1,
+			zona2,
+			zona3,
+			zona4,
+			zona5,
+			zona6,
+		} = state;
 	};
 
 	return (
@@ -96,8 +70,8 @@ const Machine = () => {
 				<Input
 					type="number"
 					id="extrusora_n"
-					value={extrusora}
-					onChange={e => setExtrusora(e.target.value)}
+					value={state.extrusora}
+					onChange={e => setState({ ...state, extrusora: e.target.value })}
 				/>
 			</Extrusora>
 
@@ -111,8 +85,8 @@ const Machine = () => {
 				<Input
 					type="number"
 					id="diametro_externo"
-					value={diametro}
-					onChange={e => setDiametro(e.target.value)}
+					value={state.diametro}
+					onChange={e => setState({ ...state, diametro: e.target.value })}
 				/>
 			</Diametro>
 			<div>
@@ -124,66 +98,87 @@ const Machine = () => {
 					<div className="material__type">
 						<Input
 							type="checkbox"
-							checked={materialCheck === 'PPN'}
+							checked={state.materialCheck === 'PPN'}
 							id="PPN"
 							name="ppn"
 							value="PPN"
-							onChange={() => setMaterialCheck(materialCheck === 'PPN' ? '' : 'PPN')}
+							onChange={() =>
+								setState({ ...state, materialCheck: state.materialCheck === 'PPN' ? '' : 'PPN' })
+							}
 						/>
 						<Label htmlFor="PPN">PPN</Label>
 					</div>
 					<div className="material__type">
 						<Input
 							type="checkbox"
-							checked={materialCheck === 'PPP'}
+							checked={state.materialCheck === 'PPP'}
 							id="PPP"
 							name="ppp"
 							value="PPP"
-							onChange={() => setMaterialCheck(materialCheck === 'PPP' ? '' : 'PPP')}
+							onChange={() =>
+								setState({ ...state, materialCheck: state.materialCheck === 'PPP' ? '' : 'PPP' })
+							}
 						/>
 						<Label htmlFor="PPP">PPP</Label>
 					</div>
 					<div className="material__type">
 						<Input
 							type="checkbox"
-							checked={materialCheck === 'PPZ'}
+							checked={state.materialCheck === 'PPZ'}
 							id="PPZ"
 							name="ppz"
 							value="PPZ"
-							onChange={() => setMaterialCheck(materialCheck === 'PPZ' ? '' : 'PPZ')}
+							onChange={() =>
+								setState({ ...state, materialCheck: state.materialCheck === 'PPZ' ? '' : 'PPZ' })
+							}
 						/>
 						<Label htmlFor="PPZ">PPZ</Label>
 					</div>
 					<div className="material__type">
 						<Input
 							type="checkbox"
-							checked={materialCheck === 'PEADN'}
+							checked={state.materialCheck === 'PEADN'}
 							id="PEADN"
 							name="peadn"
 							value="PEADN"
-							onChange={() => setMaterialCheck(materialCheck === 'PEADN' ? '' : 'PEADN')}
+							onChange={() =>
+								setState({
+									...state,
+									materialCheck: state.materialCheck === 'PEADN' ? '' : 'PEADN',
+								})
+							}
 						/>
 						<Label htmlFor="PEADN">PEADN</Label>
 					</div>
 					<div className="material__type">
 						<Input
 							type="checkbox"
-							checked={materialCheck === 'PEADP'}
+							checked={state.materialCheck === 'PEADP'}
 							id="PEADP"
 							name="peadp"
 							value="PEADP"
-							onChange={() => setMaterialCheck(materialCheck === 'PEADP' ? '' : 'PEADP')}
+							onChange={() =>
+								setState({
+									...state,
+									materialCheck: state.materialCheck === 'PEADP' ? '' : 'PEADP',
+								})
+							}
 						/>
 						<Label htmlFor="PEADP">PEADP</Label>
 					</div>
 					<div className="material__type">
 						<Input
 							type="checkbox"
-							checked={materialCheck === 'OUTROS'}
+							checked={state.materialCheck === 'OUTROS'}
 							d="OUTROS"
 							name="outros"
 							value="OUTROS"
-							onChange={() => setMaterialCheck(materialCheck === 'OUTROS' ? '' : 'OUTROS')}
+							onChange={() =>
+								setState({
+									...state,
+									materialCheck: state.materialCheck === 'OUTROS' ? '' : 'OUTROS',
+								})
+							}
 						/>
 						<Label htmlFor="OUTROS">OUTROS</Label>
 					</div>
@@ -203,8 +198,8 @@ const Machine = () => {
 					<ZonaInput
 						type="text"
 						id="zona-1"
-						value={zona1}
-						onChange={e => setZona1(e.target.value)}
+						value={state.zona1}
+						onChange={e => setState({ ...state, zona1: e.target.value })}
 					/>
 				</div>
 				<div className="zona">
@@ -212,8 +207,8 @@ const Machine = () => {
 					<ZonaInput
 						type="text"
 						id="zona-2"
-						value={zona2}
-						onChange={e => setZona2(e.target.value)}
+						value={state.zona2}
+						onChange={e => setState({ ...state, zona2: e.target.value })}
 					/>
 				</div>
 				<div className="zona">
@@ -221,8 +216,8 @@ const Machine = () => {
 					<ZonaInput
 						type="text"
 						id="zona-3"
-						value={zona3}
-						onChange={e => setZona3(e.target.value)}
+						value={state.zona3}
+						onChange={e => setState({ ...state, zona3: e.target.value })}
 					/>
 				</div>
 				<div className="zona">
@@ -230,8 +225,8 @@ const Machine = () => {
 					<ZonaInput
 						type="text"
 						id="zona-4"
-						value={zona4}
-						onChange={e => setZona4(e.target.value)}
+						value={state.zona4}
+						onChange={e => setState({ ...state, zona4: e.target.value })}
 					/>
 				</div>
 				<div className="zona">
@@ -239,8 +234,8 @@ const Machine = () => {
 					<ZonaInput
 						type="text"
 						id="zona-5"
-						value={zona5}
-						onChange={e => setZona5(e.target.value)}
+						value={state.zona5}
+						onChange={e => setState({ ...state, zona5: e.target.value })}
 					/>
 				</div>
 				<div className="zona">
@@ -248,8 +243,8 @@ const Machine = () => {
 					<ZonaInput
 						type="text"
 						id="zona-6"
-						value={zona6}
-						onChange={e => setZona6(e.target.value)}
+						value={state.zona6}
+						onChange={e => setState({ ...state, zona6: e.target.value })}
 					/>
 				</div>
 			</Temperatura>
@@ -269,8 +264,8 @@ const Machine = () => {
 					<ControleInput
 						type="text"
 						id="velocidade_da_rosca"
-						value={velocidade_da_rosca}
-						onChange={e => setVelocidade_da_rosca(e.target.value)}
+						value={state.velocidade_da_rosca}
+						onChange={e => setState({ ...state, velocidade_da_rosca: e.target.value })}
 					/>
 				</div>
 				<div className="controle">
@@ -280,8 +275,8 @@ const Machine = () => {
 					<ControleInput
 						type="text"
 						id="amperagem_da_rosca"
-						value={amperagem_da_rosca}
-						onChange={e => setAmperagem_da_rosca(e.target.value)}
+						value={state.amperagem_da_rosca}
+						onChange={e => setState({ ...state, amperagem_da_rosca: e.target.value })}
 					/>
 				</div>
 				<div className="controle">
@@ -291,8 +286,8 @@ const Machine = () => {
 					<ControleInput
 						type="text"
 						id="pressao_do_material"
-						value={pressao_do_material}
-						onChange={e => setPressao_do_material(e.target.value)}
+						value={state.pressao_do_material}
+						onChange={e => setState({ ...state, pressao_do_material: e.target.value })}
 					/>
 				</div>
 				<div className="controle">
@@ -302,8 +297,8 @@ const Machine = () => {
 					<ControleInput
 						type="text"
 						id="pressao_do_freio"
-						value={pressao_do_freio}
-						onChange={e => setPressao_do_freio(e.target.value)}
+						value={state.pressao_do_freio}
+						onChange={e => setState({ ...state, pressao_do_freio: e.target.value })}
 					/>
 				</div>
 				<div className="controle">
@@ -313,8 +308,8 @@ const Machine = () => {
 					<ControleInput
 						type="text"
 						id="temperatura_da_agua"
-						value={temperatura_da_agua}
-						onChange={e => setTemperatura_da_agua(e.target.value)}
+						value={state.temperatura_da_agua}
+						onChange={e => setState({ ...state, temperatura_da_agua: e.target.value })}
 					/>
 				</div>
 				<div className="controle">
@@ -324,8 +319,8 @@ const Machine = () => {
 					<ControleInput
 						type="text"
 						id="producao"
-						value={producao}
-						onChange={e => setProducao(e.target.value)}
+						value={state.producao}
+						onChange={e => setState({ ...state, producao: e.target.value })}
 					/>
 				</div>
 			</Controle>
