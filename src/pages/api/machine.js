@@ -1,18 +1,28 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+import dbConnection from '../../services/dbConnection';
+import Machine from '../../models/machine';
 
-export default (req, res) => {
+export default async (req, res) => {
+	await dbConnection();
+
 	switch (req.method) {
 		case 'GET':
-			res.status(200).json({ method: 'GET' });
-			break;
+			try {
+				const machines = await Machine.find({});
+				res.status(200).json({ success: true, data: machines });
+			} catch (error) {
+				res.status(400).json({ success: false, error });
+			}
 		case 'POST':
-			res.status(200).json({ method: 'POST' });
-			break;
+			try {
+				res.status(200).json({ method: 'POST' });
+			} catch (error) {
+				res.state(400).json({ success: false, error });
+			}
 		case 'PUT':
-			res.status(200).json({ method: 'PUT' });
-			break;
-		case 'DELETE':
-			res.status(200).json({ method: 'DELETE' });
-			break;
+			try {
+				res.status(200).json({ method: 'PUT' });
+			} catch (error) {
+				res.status(400).json({ success: false, error });
+			}
 	}
 };
