@@ -1,10 +1,15 @@
 import mongoose from 'mongoose';
 
-const Machine = new mongoose.Schema({
+delete mongoose.connection.models['client'];
+
+const Schema = mongoose.Schema;
+
+const Machines = Schema({
 	name: String,
+	slug: String,
 	extrusora: String,
 	diametro: String,
-	material: String,
+	materialCheck: String,
 	zona1: String,
 	zona2: String,
 	zona3: String,
@@ -19,4 +24,6 @@ const Machine = new mongoose.Schema({
 	producao: String,
 });
 
-export default mongoose.model('Machine', Machine);
+export default mongoose.models && mongoose.models.Machines
+	? mongoose.models.Machines
+	: mongoose.model('Machines', Machines);
