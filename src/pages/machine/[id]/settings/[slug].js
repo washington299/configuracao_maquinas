@@ -1,11 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { ArrowBack } from '@material-ui/icons';
 
-import { formatSlugToString } from '../../../helpers/parsers';
+import { createMachineSettings } from '../../../../services/api';
+import dbConnection from '../../../../services/dbConnection';
+import Machines from '../../../../models/machine';
+import { formatSlugToString } from '../../../../helpers/parsers';
 
-import { Title, Label, Input, SmallText } from '../../../styles/globalElements';
+import { Title, Label, Input, SmallText } from '../../../../styles/globalElements';
 import Container, {
 	Extrusora,
 	Diametro,
@@ -19,51 +22,43 @@ import Container, {
 	SaveButton,
 } from './styles';
 
-const Machine = () => {
-	const { query, push } = useRouter();
-	const { slug } = query;
+const initialSettings = {
+	extrusora: '',
+	diametro: '',
+	materialCheck: '',
+	zona1: '',
+	zona2: '',
+	zona3: '',
+	zona4: '',
+	zona5: '',
+	zona6: '',
+	velocidade_da_rosca: '',
+	amperagem_da_rosca: '',
+	pressao_do_material_na_saida_da_rosca: '',
+	pressao_do_freio: '',
+	temperatura_da_agua: '',
+	producao: '',
+};
 
-	const [state, setState] = useState({
-		extrusora: '',
-		diametro: '',
-		materialCheck: '',
-		zona1: '',
-		zona2: '',
-		zona3: '',
-		zona4: '',
-		zona5: '',
-		zona6: '',
-		velocidade_da_rosca: '',
-		amperagem_da_rosca: '',
-		pressao_do_material: '',
-		pressao_do_freio: '',
-		temperatura_da_agua: '',
-		producao: '',
-	});
+const Machine = ({ data }) => {
+	const router = useRouter();
+	const { id, slug } = router.query;
+
+	const [state, setState] = useState(data || initialSettings);
 
 	const handleClick = async () => {
-		const {
-			amperagem_da_rosca,
-			diametro,
-			extrusora,
-			materialCheck,
-			pressao_do_freio,
-			pressao_do_material,
-			producao,
-			temperatura_da_agua,
-			velocidade_da_rosca,
-			zona1,
-			zona2,
-			zona3,
-			zona4,
-			zona5,
-			zona6,
-		} = state;
+		const name = id;
+		state.name = name;
+		state.slug = formatSlugToString(slug);
+		await createMachineSettings(state);
 	};
 
 	return (
 		<Container>
-			<ArrowBack style={{ position: 'absolute', left: 10, top: 15 }} onClick={() => push('/')} />
+			<ArrowBack
+				style={{ position: 'absolute', left: 10, top: 15 }}
+				onClick={() => router.back('/')}
+			/>
 			<Title>{formatSlugToString(slug)}</Title>
 			<Extrusora>
 				<Label htmlFor="extrusora_n">Extrusora nº:</Label>
@@ -286,8 +281,10 @@ const Machine = () => {
 					<ControleInput
 						type="text"
 						id="pressao_do_material"
-						value={state.pressao_do_material}
-						onChange={e => setState({ ...state, pressao_do_material: e.target.value })}
+						value={state.pressao_do_material_na_saida_da_rosca}
+						onChange={e =>
+							setState({ ...state, pressao_do_material_na_saida_da_rosca: e.target.value })
+						}
 					/>
 				</div>
 				<div className="controle">
@@ -335,3 +332,17 @@ const Machine = () => {
 };
 
 export default Machine;
+
+export const getServerSideProps = async ctx => {
+	await dbConnection();
+
+	let setting = await Machines.findOne({ slug: ctx.params.slug });
+	setting = JSON.stringify(setting);
+	setting = JSON.parse(setting);
+
+	return {
+		props: {
+			data: setting,
+		},
+	};
+};

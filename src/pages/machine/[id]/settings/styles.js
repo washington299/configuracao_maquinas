@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { Label, Button } from '../../../styles/globalElements';
+import { Label, Button } from '../../../../styles/globalElements';
 
 export default styled.div`
 	padding: 20px;

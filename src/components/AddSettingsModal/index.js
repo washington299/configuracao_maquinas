@@ -17,7 +17,7 @@ const AddSettingsModal = ({ setSettingsModal, folders, setFolders }) => {
 			return;
 		}
 
-		setFolders(folders.concat({ id: folders.length + 1, title }));
+		setFolders(folders.concat({ id: folders.length + 1, slug: title }));
 		setSettingsModal(false);
 	};
 
