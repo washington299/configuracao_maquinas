@@ -9,7 +9,7 @@ import { createSlugBasedOnString } from '../../../helpers/parsers';
 import AddSettingsModal from '../../../components/AddSettingsModal';
 
 import { Title, Line } from '../../../styles/globalElements';
-import { Container, CreateSettingButton, Folder } from './styles';
+import { Container, CreateSettingButton, Folder } from '../../../styles/machine/styles';
 
 const Machine = ({ machineSettings }) => {
 	const router = useRouter();

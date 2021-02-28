@@ -18,7 +18,7 @@ import Container, {
 	ControleLabel,
 	ControleInput,
 	SaveButton,
-} from './styles';
+} from '../../../../../styles/machine/settings/add/styles';
 
 const initialSettings = {
 	extrusora: '',

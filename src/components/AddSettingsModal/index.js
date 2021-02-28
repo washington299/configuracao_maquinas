@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import { Settings, Close } from '@material-ui/icons';
 
+import { createSlugBasedOnString } from '../../helpers/parsers';
+
 import { Container, CreateButton, ModalBox, ModalInput } from './styles';
 
 const AddSettingsModal = ({ id, setSettingsModal }) => {
@@ -21,7 +23,7 @@ const AddSettingsModal = ({ id, setSettingsModal }) => {
 		}
 
 		setSettingsModal(false);
-		router.push(`/machine/${id}/settings/add/${title}`);
+		router.push(`/machine/${id}/settings/add/${createSlugBasedOnString(title)}`);
 	};
 
 	return (

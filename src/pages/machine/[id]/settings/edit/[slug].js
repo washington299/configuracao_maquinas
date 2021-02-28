@@ -20,7 +20,7 @@ import Container, {
 	ControleLabel,
 	ControleInput,
 	SaveButton,
-} from './styles';
+} from '../../../../../styles/machine/settings/edit/styles';
 
 const MachineEdit = ({ data }) => {
 	const router = useRouter();
@@ -318,7 +318,8 @@ export default MachineEdit;
 export const getServerSideProps = async ctx => {
 	await dbConnection();
 
-	let setting = await Machines.findOne({ slug: ctx.params.slug });
+	const slug = formatSlugToString(ctx.params.slug);
+	let setting = await Machines.findOne({ slug });
 	setting = JSON.stringify(setting);
 	setting = JSON.parse(setting);
 
