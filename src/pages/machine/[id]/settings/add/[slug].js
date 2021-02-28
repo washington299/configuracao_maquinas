@@ -38,10 +38,7 @@ const initialSettings = {
 	producao: '',
 };
 
-const MachineAdd = () => {
-	const router = useRouter();
-	const { id, slug } = router.query;
-
+const MachineAdd = ({ id, slug }) => {
 	const [state, setState] = useState(initialSettings);
 
 	const handleClick = async () => {
@@ -330,3 +327,14 @@ const MachineAdd = () => {
 };
 
 export default MachineAdd;
+
+export const getServerSideProps = ctx => {
+	const { id, slug } = ctx.params;
+
+	return {
+		props: {
+			id,
+			slug,
+		},
+	};
+};
