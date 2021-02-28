@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
+import { useRouter } from 'next/router';
 import { Settings, Close } from '@material-ui/icons';
 
 import { Container, CreateButton, ModalBox, ModalInput } from './styles';
 
-const AddSettingsModal = ({ setSettingsModal, folders, setFolders }) => {
+const AddSettingsModal = ({ id, setSettingsModal }) => {
 	const [title, setTitle] = useState('');
 	const [error, setError] = useState('');
+
+	const router = useRouter();
 
 	const createConfig = () => {
 		if (!title) {
@@ -17,8 +20,8 @@ const AddSettingsModal = ({ setSettingsModal, folders, setFolders }) => {
 			return;
 		}
 
-		setFolders(folders.concat({ id: folders.length + 1, slug: title }));
 		setSettingsModal(false);
+		router.push(`/machine/${id}/settings/add/${title}`);
 	};
 
 	return (

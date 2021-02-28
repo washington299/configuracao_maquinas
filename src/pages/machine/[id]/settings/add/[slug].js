@@ -3,12 +3,10 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { ArrowBack } from '@material-ui/icons';
 
-import { createMachineSettings } from '../../../../services/api';
-import dbConnection from '../../../../services/dbConnection';
-import Machines from '../../../../models/machine';
-import { formatSlugToString } from '../../../../helpers/parsers';
+import { createMachineSettings } from '../../../../../services/api';
+import { formatSlugToString } from '../../../../../helpers/parsers';
 
-import { Title, Label, Input, SmallText } from '../../../../styles/globalElements';
+import { Title, Label, Input, SmallText } from '../../../../../styles/globalElements';
 import Container, {
 	Extrusora,
 	Diametro,
@@ -40,11 +38,11 @@ const initialSettings = {
 	producao: '',
 };
 
-const Machine = ({ data }) => {
+const MachineAdd = () => {
 	const router = useRouter();
 	const { id, slug } = router.query;
 
-	const [state, setState] = useState(data || initialSettings);
+	const [state, setState] = useState(initialSettings);
 
 	const handleClick = async () => {
 		const name = id;
@@ -63,7 +61,7 @@ const Machine = ({ data }) => {
 			<Extrusora>
 				<Label htmlFor="extrusora_n">Extrusora nº:</Label>
 				<Input
-					type="number"
+					type="text"
 					id="extrusora_n"
 					value={state.extrusora}
 					onChange={e => setState({ ...state, extrusora: e.target.value })}
@@ -78,7 +76,7 @@ const Machine = ({ data }) => {
 				</Label>
 				<br />
 				<Input
-					type="number"
+					type="text"
 					id="diametro_externo"
 					value={state.diametro}
 					onChange={e => setState({ ...state, diametro: e.target.value })}
@@ -331,18 +329,4 @@ const Machine = ({ data }) => {
 	);
 };
 
-export default Machine;
-
-export const getServerSideProps = async ctx => {
-	await dbConnection();
-
-	let setting = await Machines.findOne({ slug: ctx.params.slug });
-	setting = JSON.stringify(setting);
-	setting = JSON.parse(setting);
-
-	return {
-		props: {
-			data: setting,
-		},
-	};
-};
+export default MachineAdd;

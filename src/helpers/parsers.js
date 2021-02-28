@@ -7,6 +7,6 @@ export const createSlugBasedOnString = value => {
 };
 
 export const formatSlugToString = value => {
-	const slug = value.normalize('NFD').replaceAll('-', ' ');
+	const slug = value.normalize('NFD').replace(/[\u0300-\u036f]/g, ' ');
 	return slug;
 };

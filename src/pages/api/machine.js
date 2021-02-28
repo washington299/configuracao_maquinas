@@ -8,21 +8,23 @@ export default async (req, res) => {
 		case 'GET':
 			try {
 				const machines = await Machine.find({});
-				res.status(200).json({ success: true, data: machines });
+				return res.status(200).json({ success: true, data: machines });
 			} catch (error) {
-				res.status(400).json({ success: false, error });
+				return res.status(400).json({ success: false, error });
 			}
 		case 'POST':
 			try {
-				res.status(200).json({ method: 'POST' });
+				const machine = await Machine.create(req.body);
+				return res.status(200).json({ success: true, data: machine });
 			} catch (error) {
-				res.state(400).json({ success: false, error });
+				return res.status(400).json({ success: false, error });
 			}
 		case 'PUT':
 			try {
-				res.status(200).json({ method: 'PUT' });
+				await Machine.findOneAndUpdate({ name: req.body.name, slug: req.body.slug }, req.body);
+				return res.status(200).json({ success: true });
 			} catch (error) {
-				res.status(400).json({ success: false, error });
+				return res.status(400).json({ success: false, error });
 			}
 	}
 };

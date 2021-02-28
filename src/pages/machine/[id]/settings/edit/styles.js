@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { Label, Button } from '../../../../styles/globalElements';
+import { Label, Button } from '../../../../../styles/globalElements';
 
 export default styled.div`
 	padding: 20px;
@@ -90,5 +90,5 @@ export const ControleInput = styled.input`
 
 export const SaveButton = styled(Button)`
 	color: #ffffff;
-	background-color: #28a745;
+	background-color: #2a77f3;
 `;

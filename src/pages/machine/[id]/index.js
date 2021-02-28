@@ -20,7 +20,7 @@ const Machine = ({ machineSettings }) => {
 
 	const handleClick = title => {
 		const slug = createSlugBasedOnString(title);
-		router.push(`/machine/${id}/settings/${slug}`);
+		router.push(`/machine/${id}/settings/edit/${slug}`);
 	};
 
 	return (
@@ -31,6 +31,7 @@ const Machine = ({ machineSettings }) => {
 			/>
 			{settingsModal && (
 				<AddSettingsModal
+					id={id}
 					setSettingsModal={setSettingsModal}
 					folders={folders}
 					setFolders={setFolders}
