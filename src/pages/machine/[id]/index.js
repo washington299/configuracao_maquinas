@@ -18,7 +18,7 @@ const Machine = ({ machineSettings }) => {
 	const [folders, setFolders] = useState(machineSettings);
 	const [settingsModal, setSettingsModal] = useState(false);
 
-	const handleClick = title => {
+	const handleClick = (id, title) => {
 		const slug = createSlugBasedOnString(title);
 		router.push(`/machine/${id}/settings/edit/${slug}`);
 	};
@@ -50,7 +50,7 @@ const Machine = ({ machineSettings }) => {
 
 			{folders.map(({ _id, slug }) => {
 				return (
-					<Folder key={_id} onClick={() => handleClick(slug)}>
+					<Folder key={_id} onClick={() => handleClick(id, slug)}>
 						{slug}
 						<Settings />
 					</Folder>

@@ -317,9 +317,9 @@ export default MachineEdit;
 
 export const getServerSideProps = async ctx => {
 	await dbConnection();
-
 	const slug = formatSlugToString(ctx.params.slug);
-	let setting = await Machines.findOne({ slug });
+	let setting = await Machines.findOne({ extrusora: ctx.params.id, slug });
+
 	setting = JSON.stringify(setting);
 	setting = JSON.parse(setting);
 
