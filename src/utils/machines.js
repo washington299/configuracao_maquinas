@@ -19,4 +19,6 @@ export const Machines = [
 	{ id: 'R' },
 	{ id: 'S' },
 	{ id: 'T' },
+	{ id: 'U' },
+	{ id: 'V' },
 ];
