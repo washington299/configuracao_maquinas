@@ -3,7 +3,7 @@ import { Heading, VStack, Text, Icon } from '@chakra-ui/react';
 
 import { RobotIcon } from 'Icons/RobotIcon';
 
-export const MachineCard = ({ letter, settingsQtd }) => {
+export const MachineCard = ({ letter }) => {
 	return (
 		<Link href={`/machine/${letter}`}>
 			<VStack
@@ -17,7 +17,6 @@ export const MachineCard = ({ letter, settingsQtd }) => {
 					<RobotIcon />
 				</Icon>
 				<Heading as="h2" fontSize="2xl">Máquina {letter}</Heading>
-				<Text>Quantidade de configurações: {settingsQtd}</Text>
 			</VStack>
 		</Link>
 	);
