@@ -2,6 +2,16 @@ import { fireEvent, render, screen } from '@testing-library/react';
 
 import { AddSettingsModal } from '.';
 
+const useRouter = jest.spyOn(require('next/router'), 'useRouter');
+const push = jest.fn();
+
+useRouter.mockImplementation(() => ({
+  push,
+  query: '',
+  asPath: '',
+  route: '/'
+}));
+
 describe('<AddSettingsModal />', () => {
 	it('Should render input with correct value', () => {
 		render(<AddSettingsModal isOpen={true} />);
@@ -38,5 +48,6 @@ describe('<AddSettingsModal />', () => {
 		fireEvent.click(createButton);
 
 		expect(mockOnClose).toHaveBeenCalledTimes(1);
+		expect(push).toHaveBeenCalledWith('/settings/test');
 	});
 });
