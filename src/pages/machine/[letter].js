@@ -1,16 +1,29 @@
 import { Fragment } from 'react';
 import { useRouter } from 'next/router';
-import { Container, Icon, Heading, Spinner, VStack, Text, SimpleGrid } from '@chakra-ui/react';
-import { ArrowBack } from '@material-ui/icons';
 import { useQuery } from '@tanstack/react-query';
+import {
+	Container,
+	Icon,
+	Heading,
+	Spinner,
+	VStack,
+	Text,
+	SimpleGrid,
+	Button,
+	useDisclosure
+} from '@chakra-ui/react';
+import { ArrowBack, Add } from '@material-ui/icons';
 
 import { getMachineSettings } from 'services/api';
 
 import { MachineSettingCard } from 'components/MachineSettingCard';
+import { AddSettingsModal } from 'components/AddSettingsModal';
 
 const MachineLetterSettings = () => {
 	const router = useRouter();
 	const machineLetter = router.query.letter;
+
+	const { isOpen, onOpen, onClose } = useDisclosure();
 
 	const { data, isLoading } = useQuery(['machine', machineLetter], async () => getMachineSettings(machineLetter));
 
@@ -18,9 +31,20 @@ const MachineLetterSettings = () => {
 		<Container py={10}>
 			<Icon as={ArrowBack} cursor="pointer" onClick={() => router.back()} />
 
-			<Heading as="h1" fontSize="2xl" textAlign="center" mb={10}>
-				Máquina {machineLetter} lista de configurações
-			</Heading>
+			<VStack mb={10} spacing={4}>
+				<Heading as="h1" fontSize="2xl" textAlign="center">
+					Máquina {machineLetter} lista de configurações
+				</Heading>
+
+				<Button
+					colorScheme="blue"
+					rightIcon={<Add />}
+					onClick={onOpen}
+				>
+					Criar nova configuração
+				</Button>
+				<AddSettingsModal isOpen={isOpen} onClose={onClose} />
+			</VStack>
 
 			{isLoading ? (
 				<VStack mt={10}>
