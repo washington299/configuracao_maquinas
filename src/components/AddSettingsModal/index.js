@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 import {
 	Modal,
 	ModalOverlay,
@@ -14,9 +15,13 @@ import {
 	Input,
 } from '@chakra-ui/react';
 
+import { createSlugBasedOnString } from 'helpers/parsers';
+
 export const AddSettingsModal = ({ isOpen, onClose }) => {
 	const [name, setName] = useState('');
 	const [error, setError] = useState(false);
+
+	const router = useRouter();
 
 	const createSetting = () => {
 		if (!name) {
@@ -25,6 +30,7 @@ export const AddSettingsModal = ({ isOpen, onClose }) => {
 		}
 
 		onClose();
+		router.push(`/settings/${createSlugBasedOnString(name)}`);
 	};
 
 	return (
