@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-delete mongoose.connection.models['client'];
+// delete mongoose.connection.models['client'];
 
 const Schema = mongoose.Schema;
 
