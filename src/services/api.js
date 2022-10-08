@@ -7,8 +7,9 @@ const api = axios.create({
 	},
 });
 
-export const getMachineSettings = async name => {
-	const { data } = await api.get(`/api/machine?name=${name}`);
+export const getMachineSettings = async letter => {
+	const { data } = await api.get(`/api/machine/${letter}`);
+
 	return data;
 };
 
