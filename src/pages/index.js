@@ -1,23 +1,22 @@
-import { Heading, Container } from '@chakra-ui/react';
+import { Heading, Container, SimpleGrid } from '@chakra-ui/react';
 
 import { MachineCard } from 'components/MachineCard';
 
+import { machinesList } from 'const/machines';
+
 const Home = () => {
 	return (
-		<Container>
+		<Container py={10}>
 			<Heading as="h1" textAlign="center" fontSize={{ base: "xl", lg: "3xl"}} my={6}>
 				Ficha referencial de preparação e regulagem extrusora tarugos
 			</Heading>
 
-			<MachineCard />
+			<SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={8}>
+				{machinesList.map((machineLetter) => (
+					<MachineCard key={machineLetter} letter={machineLetter} settingsQtd={0} />
+				))}
+			</SimpleGrid>
 		</Container>
-		// <Container>
-		// 	<Title>Ficha referencial de preparação e regulagem extrusora tarugos</Title>
-
-		// 	{Machines.map(({ id }) => (
-		// 		<MachineLinkButton key={id} id={id} />
-		// 	))}
-		// </Container>
 	);
 };
 
