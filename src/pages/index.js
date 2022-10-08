@@ -13,7 +13,7 @@ const Home = () => {
 
 			<SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={8}>
 				{machinesList.map((machineLetter) => (
-					<MachineCard key={machineLetter} letter={machineLetter} settingsQtd={0} />
+					<MachineCard key={machineLetter} letter={machineLetter} />
 				))}
 			</SimpleGrid>
 		</Container>
