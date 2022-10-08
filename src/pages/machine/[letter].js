@@ -1,9 +1,11 @@
 import { Fragment } from 'react';
 import { useRouter } from 'next/router';
-import { Container, Icon, Heading, Spinner, VStack, HStack, Text, SimpleGrid } from '@chakra-ui/react';
-import { ArrowBack, Settings } from '@material-ui/icons';
+import { Container, Icon, Heading, Spinner, VStack, Text, SimpleGrid } from '@chakra-ui/react';
+import { ArrowBack } from '@material-ui/icons';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
+
+import { MachineSettingCard } from 'components/MachineSettingCard';
 
 const MachineLetterSettings = () => {
 	const router = useRouter();
@@ -32,17 +34,7 @@ const MachineLetterSettings = () => {
 					{data?.data?.length > 0 ? (
 						<SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={8}>
 							{data?.data?.map(setting => (
-								<HStack key={setting._id}
-									alignItems="center"
-									boxShadow="base"
-									borderRadius="md"
-									p={3}
-									cursor="pointer"
-									_hover={{ bg: 'blackAlpha.50' }}
-								>
-									<Text>{setting.slug}</Text>
-									<Icon as={Settings} w="100px" h="100px" />
-								</HStack>
+								<MachineSettingCard key={setting._id} name={setting.slug} />
 							))}
 						</SimpleGrid>
 					) : (
