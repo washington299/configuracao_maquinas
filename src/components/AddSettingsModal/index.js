@@ -1,51 +1,57 @@
-import React, { useState } from 'react';
-import { useRouter } from 'next/router';
-import { Settings, Close } from '@material-ui/icons';
+import { useState } from 'react';
+import {
+	Modal,
+	ModalOverlay,
+	ModalContent,
+	ModalHeader,
+	ModalBody,
+	ModalFooter,
+	ModalCloseButton,
+	Button,
+	FormControl,
+	FormLabel,
+	FormErrorMessage,
+	Input,
+} from '@chakra-ui/react';
 
-import { createSlugBasedOnString } from '../../helpers/parsers';
+export const AddSettingsModal = ({ isOpen, onClose }) => {
+	const [name, setName] = useState('');
+	const [error, setError] = useState(false);
 
-import { Container, CreateButton, ModalBox, ModalInput } from './styles';
-
-const AddSettingsModal = ({ id, setSettingsModal }) => {
-	const [title, setTitle] = useState('');
-	const [error, setError] = useState('');
-
-	const router = useRouter();
-
-	const createConfig = () => {
-		if (!title) {
-			setError('Preencha o campo de nome da configuração!');
+	const createSetting = () => {
+		if (!name) {
+			setError(true);
 			return;
 		}
-		if (title.includes('-')) {
-			setError('Por favor não usar o simbolo de: -');
-			return;
-		}
 
-		setSettingsModal(false);
-		router.push(`/machine/${id}/settings/add/${createSlugBasedOnString(title)}`);
+		onClose();
 	};
 
 	return (
-		<Container>
-			<ModalBox>
-				<div className="close-button">
-					<Close onClick={() => setSettingsModal(false)} />
-				</div>
-				<h1>
-					Nome da configuração
-					<Settings />
-				</h1>
-				<ModalInput
-					value={title}
-					onChange={e => setTitle(e.target.value)}
-					placeholder="Digite um nome para configuração..."
-				/>
-				{error && <span>{error}</span>}
-				<CreateButton onClick={createConfig}>Criar</CreateButton>
-			</ModalBox>
-		</Container>
+		<Modal isOpen={isOpen} onClose={onClose} isCentered>
+			<ModalOverlay />
+
+			<ModalContent>
+				<ModalHeader>Criar configuração</ModalHeader>
+				<ModalCloseButton />
+
+				<ModalBody>
+					<FormControl isInvalid={error}>
+						<FormLabel mb={1}>Nome da configuração:</FormLabel>
+						<Input
+							type="text"
+							placeholder="Digite um nome"
+							value={name}
+							onChange={(e) => setName(e.target.value)}
+						/>
+						{error && <FormErrorMessage mt={0}>Nome é obrigatório</FormErrorMessage>}
+					</FormControl>
+				</ModalBody>
+
+				<ModalFooter>
+					<Button colorScheme="green" onClick={createSetting}>Criar</Button>
+				</ModalFooter>
+			</ModalContent>
+		</Modal>
 	);
 };
-
-export default AddSettingsModal;
