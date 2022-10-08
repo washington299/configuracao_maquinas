@@ -3,7 +3,8 @@ import { useRouter } from 'next/router';
 import { Container, Icon, Heading, Spinner, VStack, Text, SimpleGrid } from '@chakra-ui/react';
 import { ArrowBack } from '@material-ui/icons';
 import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
+
+import { getMachineSettings } from 'services/api';
 
 import { MachineSettingCard } from 'components/MachineSettingCard';
 
@@ -11,11 +12,7 @@ const MachineLetterSettings = () => {
 	const router = useRouter();
 	const machineLetter = router.query.letter;
 
-	const { data, isLoading } = useQuery(['machine', machineLetter], async () => {
-		const { data } = await axios({ url: `http://localhost:3000/api/machine/${machineLetter}`, method: 'get' });
-
-		return data;
-	});
+	const { data, isLoading } = useQuery(['machine', machineLetter], async () => getMachineSettings(machineLetter));
 
 	return (
 		<Container py={10}>
