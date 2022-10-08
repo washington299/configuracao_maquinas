@@ -4,8 +4,12 @@ import { MachineCard } from '.';
 
 describe('<MachineCard />', () => {
 	it('Should render expected elements', () => {
-		render(<MachineCard />);
+		const letter = "A";
+		const settingsQtd = 18;
 
-		expect(screen.getByRole('heading', { name: /Máquina A/i })).toBeInTheDocument();
+		render(<MachineCard letter={letter} settingsQtd={18} />);
+
+		expect(screen.getByRole('heading', { name: `Máquina ${letter}` })).toBeInTheDocument();
+		expect(screen.getByText(`Quantidade de configurações: ${settingsQtd}`)).toBeInTheDocument();
 	});
 });
