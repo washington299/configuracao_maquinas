@@ -13,6 +13,7 @@ module.exports = {
 		"!src/services/**/*.{js,jsx}",
 		"!src/Icons/**/*.{js,jsx}",
 		"!src/models/**/*.{js,jsx}",
+		"!src/const/**/*.{js,jsx}",
 	],
   coverageDirectory: "coverage",
   testEnvironment: "jsdom",
