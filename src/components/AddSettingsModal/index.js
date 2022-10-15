@@ -22,6 +22,7 @@ export const AddSettingsModal = ({ isOpen, onClose }) => {
 	const [error, setError] = useState(false);
 
 	const router = useRouter();
+	const machineLetter = router.query.letter;
 
 	const createSetting = () => {
 		if (!name) {
@@ -30,7 +31,7 @@ export const AddSettingsModal = ({ isOpen, onClose }) => {
 		}
 
 		onClose();
-		router.push(`/settings/${createSlugBasedOnString(name)}`);
+		router.push(`/machine/${machineLetter}/setting/${createSlugBasedOnString(name)}`);
 	};
 
 	return (

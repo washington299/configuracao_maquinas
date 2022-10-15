@@ -4,10 +4,11 @@ import { AddSettingsModal } from '.';
 
 const useRouter = jest.spyOn(require('next/router'), 'useRouter');
 const push = jest.fn();
+const query = jest.fn();
 
 useRouter.mockImplementation(() => ({
   push,
-  query: '',
+  query,
   asPath: '',
   route: '/'
 }));
@@ -48,6 +49,6 @@ describe('<AddSettingsModal />', () => {
 		fireEvent.click(createButton);
 
 		expect(mockOnClose).toHaveBeenCalledTimes(1);
-		expect(push).toHaveBeenCalledWith('/settings/test');
+		expect(push).toHaveBeenCalledWith(`/machine/${query.letter}/setting/test`);
 	});
 });
