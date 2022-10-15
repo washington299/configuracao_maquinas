@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
-import { Container, Heading } from '@chakra-ui/react';
+import { Container, Icon, Heading } from '@chakra-ui/react';
+import { ArrowBack } from '@material-ui/icons';
 
 import { formatSlugToString } from 'helpers/parsers';
 
@@ -13,6 +14,8 @@ const SettingPage = () => {
 
 	return (
 		<Container py={10}>
+			<Icon as={ArrowBack} cursor="pointer" onClick={() => router.back()} />
+
 			<Heading textAlign="center" fontSize="2xl">
 				Máquina {machineLetter} - {settingId.toUpperCase()}
 			</Heading>
