@@ -1,6 +1,5 @@
 import { Fragment } from 'react';
 import { useRouter } from 'next/router';
-import { useQuery } from '@tanstack/react-query';
 import {
 	Container,
 	Icon,
@@ -14,7 +13,7 @@ import {
 } from '@chakra-ui/react';
 import { ArrowBack, Add } from '@material-ui/icons';
 
-import { getMachineSettings } from 'services/api';
+import { useGetMachineSettings } from 'services/queries';
 
 import { MachineSettingCard } from 'components/MachineSettingCard';
 import { AddSettingsModal } from 'components/AddSettingsModal';
@@ -25,7 +24,7 @@ const MachineLetterSettings = () => {
 
 	const { isOpen, onOpen, onClose } = useDisclosure();
 
-	const { data, isLoading } = useQuery(['machine', machineLetter], async () => getMachineSettings(machineLetter));
+	const { data, isLoading } = useGetMachineSettings(machineLetter);
 
 	return (
 		<Container py={10}>
