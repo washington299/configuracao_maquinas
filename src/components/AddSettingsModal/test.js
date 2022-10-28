@@ -49,6 +49,6 @@ describe('<AddSettingsModal />', () => {
 		fireEvent.click(createButton);
 
 		expect(mockOnClose).toHaveBeenCalledTimes(1);
-		expect(push).toHaveBeenCalledWith(`/machine/${query.letter}/setting/test`);
+		expect(push).toHaveBeenCalledWith(`/machine/${query.letter}/setting/test?create=true`);
 	});
 });

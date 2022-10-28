@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import {
 	Heading,
 	Box,
@@ -19,6 +20,8 @@ import {
 } from '@chakra-ui/react';
 
 export const SettingForm = () => {
+	const router = useRouter();
+
 	return (
 		<>
 			<VStack w="full" spacing={6} mt={6}>
@@ -119,7 +122,9 @@ export const SettingForm = () => {
 			</VStack>
 
 			<HStack mt={10} justifyContent="flex-end">
-				<Button colorScheme="red">Deletar</Button>
+				{!router?.query?.create && (
+					<Button colorScheme="red">Deletar</Button>
+				)}
 				<Button colorScheme="green">Salvar</Button>
 			</HStack>
 		</>

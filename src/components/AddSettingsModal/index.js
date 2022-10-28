@@ -31,7 +31,7 @@ export const AddSettingsModal = ({ isOpen, onClose }) => {
 		}
 
 		onClose();
-		router.push(`/machine/${machineLetter}/setting/${createSlugBasedOnString(name)}`);
+		router.push(`/machine/${machineLetter}/setting/${createSlugBasedOnString(name)}?create=true`);
 	};
 
 	return (
