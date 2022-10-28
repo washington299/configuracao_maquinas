@@ -17,13 +17,20 @@ import {
 	Checkbox,
 	Text,
 	Button,
+	useDisclosure,
 } from '@chakra-ui/react';
+
+import { DeleteSettingModal } from 'components/DeleteSettingModal';
 
 export const SettingForm = () => {
 	const router = useRouter();
 
+  const { isOpen, onOpen, onClose } = useDisclosure()
+
 	return (
 		<>
+			<DeleteSettingModal isOpen={isOpen} onClose={onClose} />
+
 			<VStack w="full" spacing={6} mt={6}>
 				<FormControl>
 					<FormLabel mb={0}>Diâmetro externo (mm):</FormLabel>
@@ -123,7 +130,7 @@ export const SettingForm = () => {
 
 			<HStack mt={10} justifyContent="flex-end">
 				{!router?.query?.create && (
-					<Button colorScheme="red">Deletar</Button>
+					<Button colorScheme="red" onClick={onOpen}>Deletar</Button>
 				)}
 				<Button colorScheme="green">Salvar</Button>
 			</HStack>
