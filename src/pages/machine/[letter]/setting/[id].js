@@ -12,6 +12,13 @@ const SettingPage = () => {
 	const machineLetter = router.query.letter;
 	const settingId = formatSlugToString(router?.query?.id || "");
 
+	const handleSubmitSettingForm = (values) => {
+		values.name = machineLetter;
+		values.slug = settingId;
+
+		console.log(values);
+	};
+
 	return (
 		<Container py={10}>
 			<Icon as={ArrowBack} cursor="pointer" onClick={() => router.back()} />
@@ -20,7 +27,7 @@ const SettingPage = () => {
 				Máquina {machineLetter} - {settingId.toUpperCase()}
 			</Heading>
 
-			<SettingForm />
+			<SettingForm handleSubmitSettingForm={handleSubmitSettingForm} />
 		</Container>
 	);
 };
