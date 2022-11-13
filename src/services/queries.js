@@ -39,6 +39,11 @@ export const updateMachineSettings = async settings => {
 	return data;
 };
 
+export const useAddMachineSettingsData = (isCreating) =>
+	useMutation((settings) => !!isCreating ? createMachineSettings(settings) : updateMachineSettings(settings));
+
+// ---------------------------------------------- //
+
 const deleteMachineSettings = async (payload) => {
 	const { data } = await api.delete('/api/machines', { data: payload });
 
