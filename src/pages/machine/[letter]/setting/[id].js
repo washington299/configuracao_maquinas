@@ -13,6 +13,7 @@ const SettingPage = () => {
 	const settingId = formatSlugToString(router?.query?.id || "");
 
 	const handleSubmitSettingForm = (values) => {
+		values.extrusora = machineLetter;
 		values.name = machineLetter;
 		values.slug = settingId;
 

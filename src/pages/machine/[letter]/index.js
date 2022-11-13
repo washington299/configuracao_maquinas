@@ -1,5 +1,6 @@
 import { Fragment } from 'react';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 import {
 	Container,
 	Icon,
@@ -14,6 +15,8 @@ import {
 import { ArrowBack, Add } from '@material-ui/icons';
 
 import { useGetMachineSettings } from 'services/queries';
+
+import { createSlugBasedOnString } from 'helpers/parsers';
 
 import { MachineSettingCard } from 'components/MachineSettingCard';
 import { AddSettingsModal } from 'components/AddSettingsModal';
@@ -54,7 +57,11 @@ const MachineLetterSettings = () => {
 					{data?.data?.length > 0 ? (
 						<SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={8}>
 							{data?.data?.map(setting => (
-								<MachineSettingCard key={setting._id} name={setting.slug} />
+								<Link href={`/machine/${machineLetter}/setting/${createSlugBasedOnString(setting.slug)}`} key={setting._id}>
+									<a>
+										<MachineSettingCard name={setting.slug} />
+									</a>
+								</Link>
 							))}
 						</SimpleGrid>
 					) : (
