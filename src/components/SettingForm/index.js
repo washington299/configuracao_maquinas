@@ -47,7 +47,7 @@ export const SettingForm = () => {
 						value={formData.diametro}
 						onChange={(value) => setFormData(previousData => ({ ...previousData, diametro: value }))}
 					>
-						<NumberInputField />
+						<NumberInputField placeholder="Diametro" />
 						<NumberInputStepper>
 							<NumberIncrementStepper />
 							<NumberDecrementStepper />
@@ -79,32 +79,62 @@ export const SettingForm = () => {
 				<SimpleGrid w="full" columns={[1, 2, 3]} spacing={6}>
 					<FormControl>
 						<FormLabel mb={0}>Zona 1</FormLabel>
-						<Input name="zona1" value={formData.zona1} onChange={handleInputFormDataChange} />
+						<Input
+							name="zona1"
+							placeholder="Zona 1"
+							value={formData.zona1}
+							onChange={handleInputFormDataChange}
+						/>
 					</FormControl>
 
 					<FormControl>
 						<FormLabel mb={0}>Zona 2</FormLabel>
-						<Input name="zona2" value={formData.zona2} onChange={handleInputFormDataChange} />
+						<Input
+							name="zona2"
+							placeholder="Zona 2"
+							value={formData.zona2}
+							onChange={handleInputFormDataChange}
+						/>
 					</FormControl>
 
 					<FormControl>
 						<FormLabel mb={0}>Zona 3</FormLabel>
-						<Input name="zona3" value={formData.zona3} onChange={handleInputFormDataChange} />
+						<Input
+							name="zona3"
+							placeholder="Zona 3"
+							value={formData.zona3}
+							onChange={handleInputFormDataChange}
+						/>
 					</FormControl>
 
 					<FormControl>
 						<FormLabel mb={0}>Zona 4</FormLabel>
-						<Input name="zona4" value={formData.zona4} onChange={handleInputFormDataChange} />
+						<Input
+							name="zona4"
+							placeholder="Zona 4"
+							value={formData.zona4}
+							onChange={handleInputFormDataChange}
+						/>
 					</FormControl>
 
 					<FormControl>
 						<FormLabel mb={0}>Zona 5</FormLabel>
-						<Input name="zona5" value={formData.zona5} onChange={handleInputFormDataChange} />
+						<Input
+							name="zona5"
+							placeholder="Zona 5"
+							value={formData.zona5}
+							onChange={handleInputFormDataChange}
+						/>
 					</FormControl>
 
 					<FormControl>
 						<FormLabel mb={0}>Zona 6</FormLabel>
-						<Input name="zona6" value={formData.zona6} onChange={handleInputFormDataChange} />
+						<Input
+							name="zona6"
+							placeholder="Zona 6"
+							value={formData.zona6}
+							onChange={handleInputFormDataChange}
+						/>
 					</FormControl>
 				</SimpleGrid>
 
@@ -115,6 +145,7 @@ export const SettingForm = () => {
 						<FormLabel mb={0}>Velocidade da rosca  (rpm)</FormLabel>
 						<Input
 							name="velocidade_da_rosca"
+							placeholder="Velocidade da rosca"
 							value={formData.velocidade_da_rosca}
 							onChange={handleInputFormDataChange}
 						/>
@@ -124,6 +155,7 @@ export const SettingForm = () => {
 						<FormLabel mb={0}>Amperagem da rosca  (A)</FormLabel>
 						<Input
 							name="amperagem_da_rosca"
+							placeholder="Amperagem da rosca"
 							value={formData.amperagem_da_rosca}
 							onChange={handleInputFormDataChange}
 						/>
@@ -133,6 +165,7 @@ export const SettingForm = () => {
 						<FormLabel mb={0}>Pressão do material na saída da rosca  (bar)</FormLabel>
 						<Input
 							name="pressao_do_material_na_saida_da_rosca"
+							placeholder="Pressão do material na saida da rosca"
 							value={formData.pressao_do_material_na_saida_da_rosca}
 							onChange={handleInputFormDataChange}
 						/>
@@ -142,6 +175,7 @@ export const SettingForm = () => {
 						<FormLabel mb={0}>Pressão do freio  (bar)</FormLabel>
 						<Input
 							name="pressao_do_freio"
+							placeholder="Pressão do freio"
 							value={formData.pressao_do_freio}
 							onChange={handleInputFormDataChange}
 						/>
@@ -151,6 +185,7 @@ export const SettingForm = () => {
 						<FormLabel mb={0}>Temperatura da água  (°c)</FormLabel>
 						<Input
 							name="temperatura_da_agua"
+							placeholder="Temperatura da agua"
 							value={formData.temperatura_da_agua}
 							onChange={handleInputFormDataChange}
 						/>
@@ -160,6 +195,7 @@ export const SettingForm = () => {
 						<FormLabel mb={0}>Produção  (kg/hora)</FormLabel>
 						<Input
 							name="producao"
+							placeholder="Produção"
 							value={formData.producao}
 							onChange={handleInputFormDataChange}
 						/>
