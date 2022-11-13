@@ -11,6 +11,22 @@ const getMachineSettings = async letter => {
 export const useGetMachineSettings = (machineLetter) =>
 	useQuery(['machine', machineLetter], async () => getMachineSettings(machineLetter));
 
+// ---------------------------------------------- //
+
+const getMachineSettingsData = async (letter, slug) => {
+	const { data } = await api.get(`/api/machine/${letter}/${slug}`);
+
+	return data;
+};
+
+export const useGetMachineSettingsData = (letter, slug, isCreating) => {
+	if (!!isCreating) return { data: null, isLoading: false };
+
+	return useQuery(['setting', letter, slug], async () => getMachineSettingsData(letter, slug), { enabled: !isCreating });
+}
+
+// ---------------------------------------------- //
+
 export const createMachineSettings = async settings => {
 	const { data } = await api.post('/api/machine', settings);
 
