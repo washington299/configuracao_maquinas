@@ -28,10 +28,12 @@ export const useGetMachineSettingsData = (letter, slug, isCreating) => {
 // ---------------------------------------------- //
 
 export const createMachineSettings = async settings => {
-	const { data } = await api.post('/api/machine', settings);
+	const { data } = await api.post('/api/machines', settings);
 
 	return data;
 };
+
+// ---------------------------------------------- //
 
 export const updateMachineSettings = async settings => {
 	const { data } = await api.put('/api/machine', settings);

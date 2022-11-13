@@ -59,7 +59,7 @@ export const SettingForm = ({ handleSubmitSettingForm }) => {
 
 	useEffect(() => {
 		if (data?.data) {
-			setFormData(data?.data[0]);
+			setFormData({ ...initialFormState, ...data?.data[0] });
 		}
 	}, [data?.data]);
 
