@@ -26,5 +26,12 @@ export default async (req, res) => {
 			} catch (error) {
 				return res.status(400).json({ success: false, error });
 			}
+		case 'DELETE':
+			try {
+				await Machine.findOneAndDelete({ name: req.body.name, slug: req.body.slug });
+				return res.status(200).json({ success: true });
+			} catch (error) {
+				return res.status(400).json({ success: false, error });
+			}
 	}
 };
