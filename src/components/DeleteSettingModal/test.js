@@ -1,9 +1,8 @@
-import { fireEvent, render, screen } from '@testing-library/react';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { fireEvent, screen } from '@testing-library/react';
+
+import { globalRender } from 'tests/helpers';
 
 import { DeleteSettingModal } from '.';
-
-const queryClient = new QueryClient();
 
 const useRouter = jest.spyOn(require('next/router'), 'useRouter');
 const push = jest.fn();
@@ -26,11 +25,7 @@ describe('<DeleteSettingModal />', () => {
 	it('Should call react-query mutate with correct params when deleted', () => {
 		isSuccess = true;
 
-		render(
-			<QueryClientProvider client={queryClient}>
-				<DeleteSettingModal isOpen />
-			</QueryClientProvider>
-		);
+		globalRender(<DeleteSettingModal isOpen />);
 
 		fireEvent.click(screen.getByRole('button', { name: /Deletar/i }));
 

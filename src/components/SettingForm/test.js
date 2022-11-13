@@ -1,9 +1,8 @@
-import { fireEvent, render, screen } from '@testing-library/react';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { fireEvent, screen } from '@testing-library/react';
+
+import { globalRender } from 'tests/helpers';
 
 import { SettingForm } from '.';
-
-const queryClient = new QueryClient();
 
 const useRouter = jest.spyOn(require('next/router'), 'useRouter');
 const useGetMachineSettingsData = jest.spyOn(require('services/queries'), 'useGetMachineSettingsData');
@@ -31,31 +30,19 @@ describe('<SettingForm />', () => {
 	it('Should hide delete button if there is create param on url query', () => {
 		query = { create: true };
 
-		render(
-			<QueryClientProvider client={queryClient}>
-				<SettingForm />
-			</QueryClientProvider>
-		);
+		globalRender(<SettingForm />);
 
 		expect(screen.queryByRole('button', { name: 'Deletar' })).not.toBeInTheDocument();
 	});
 
 	it('Should show delete button if there is create param on url query', () => {
-		render(
-			<QueryClientProvider client={queryClient}>
-				<SettingForm />
-			</QueryClientProvider>
-		);
+		globalRender(<SettingForm />);
 
 		expect(screen.getByRole('button', { name: 'Deletar' })).toBeInTheDocument();
 	});
 
 	it('Should change inputs values correct', () => {
-		render(
-			<QueryClientProvider client={queryClient}>
-				<SettingForm />
-			</QueryClientProvider>
-		);
+		globalRender(<SettingForm />);
 
 		const diametroInput = screen.getByPlaceholderText(/Diametro/i);
 		const zona1Input = screen.getByPlaceholderText(/Zona 1/i);
@@ -68,11 +55,7 @@ describe('<SettingForm />', () => {
 	});
 
 	it('Should check checkbox fields correct', () => {
-		render(
-			<QueryClientProvider client={queryClient}>
-				<SettingForm />
-			</QueryClientProvider>
-		);
+		globalRender(<SettingForm />);
 
 		const PPNCheckbox = screen.getByLabelText(/PPN/i);
 
@@ -86,11 +69,7 @@ describe('<SettingForm />', () => {
 	it('Should call handleSubmitSettingForm with correct values when form is submited', () => {
 		const handleSubmitSettingFormMock = jest.fn();
 
-		render(
-			<QueryClientProvider client={queryClient}>
-				<SettingForm handleSubmitSettingForm={handleSubmitSettingFormMock} />
-			</QueryClientProvider>
-		);
+		globalRender(<SettingForm handleSubmitSettingForm={handleSubmitSettingFormMock} />);
 
 		const diametroInput = screen.getByPlaceholderText(/Diametro/i);
 		const OUTROSCheckbox = screen.getByLabelText(/OUTROS/i);
@@ -147,11 +126,7 @@ describe('<SettingForm />', () => {
 	it('Should show loading spinner is isLoading is true', () => {
 		isLoading = true;
 
-		render(
-			<QueryClientProvider client={queryClient}>
-				<SettingForm />
-			</QueryClientProvider>
-		);
+		globalRender(<SettingForm />);
 
 		expect(screen.getByTestId('spinbutton')).toBeInTheDocument();
 	});
@@ -179,11 +154,7 @@ describe('<SettingForm />', () => {
 			],
 		};
 
-		render(
-			<QueryClientProvider client={queryClient}>
-				<SettingForm />
-			</QueryClientProvider>
-		);
+		globalRender(<SettingForm />);
 
 		expect(screen.getByLabelText(/Diâmetro externo/i)).toHaveValue("10");
 		expect(screen.getByLabelText(/OUTROS/i)).toBeChecked();
