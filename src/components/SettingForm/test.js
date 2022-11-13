@@ -41,4 +41,16 @@ describe('<SettingForm />', () => {
 		expect(diametroInput).toHaveValue("10");
 		expect(zona1Input).toHaveValue('Zona 1 teste');
 	});
+
+	it('Should check checkbox fields correct', () => {
+		render(<SettingForm />);
+
+		const PPNCheckbox = screen.getByLabelText(/PPN/i);
+
+		expect(PPNCheckbox).not.toBeChecked();
+
+		fireEvent.click(PPNCheckbox);
+
+		expect(PPNCheckbox).toBeChecked();
+	});
 });
