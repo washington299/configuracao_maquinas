@@ -31,7 +31,7 @@ const MachineLetterSettings = () => {
 
 	return (
 		<Container py={10}>
-			<Icon as={ArrowBack} cursor="pointer" onClick={() => router.back()} />
+			<Icon as={ArrowBack} cursor="pointer" onClick={() => router.push('/')} />
 
 			<VStack mb={10} spacing={4}>
 				<Heading as="h1" fontSize="2xl" textAlign="center">

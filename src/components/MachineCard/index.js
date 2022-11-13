@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Heading, VStack, Text, Icon } from '@chakra-ui/react';
+import { Heading, VStack, Icon } from '@chakra-ui/react';
 
 import { RobotIcon } from 'Icons/RobotIcon';
 

@@ -41,7 +41,7 @@ const SettingPage = () => {
 		<Container py={10}>
 			{isSuccess && handleSuccess()}
 
-			<Icon as={ArrowBack} cursor="pointer" onClick={() => router.back()} />
+			<Icon as={ArrowBack} cursor="pointer" onClick={() => router.push(`/machine/${machineLetter}`)} />
 
 			<Heading textAlign="center" fontSize="2xl">
 				Máquina {machineLetter} - {settingId.toUpperCase()}
