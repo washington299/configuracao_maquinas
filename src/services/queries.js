@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useMutation } from '@tanstack/react-query';
 
 import { api } from './api';
 
@@ -33,10 +33,17 @@ export const createMachineSettings = async settings => {
 	return data;
 };
 
-// ---------------------------------------------- //
-
 export const updateMachineSettings = async settings => {
-	const { data } = await api.put('/api/machine', settings);
+	const { data } = await api.put('/api/machines', settings);
 
 	return data;
 };
+
+const deleteMachineSettings = async (payload) => {
+	const { data } = await api.delete('/api/machines', { data: payload });
+
+	return data;
+}
+
+export const useDeleteMachineSettings = () =>
+	useMutation((payload) => deleteMachineSettings(payload));
