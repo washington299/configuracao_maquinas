@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import {
 	Text,
 	Button,
@@ -8,24 +9,50 @@ import {
 	ModalBody,
 	ModalFooter,
 	ModalCloseButton,
+	useToast,
 } from '@chakra-ui/react';
 
-export const DeleteSettingModal = ({ isOpen, onClose }) => {
-	return (
-		<Modal isOpen={isOpen} onClose={onClose} isCentered>
-			<ModalOverlay />
+import { useDeleteMachineSettings } from 'services/queries';
 
-			<ModalContent>
-				<ModalHeader>Deletar configuração</ModalHeader>
-				<ModalCloseButton />
-				<ModalBody>
-					<Text>Tem certeza que deseja excluir essa configuração?</Text>
-				</ModalBody>
-				<ModalFooter>
-					<Button onClick={onClose} mr={3}>Cancelar</Button>
-					<Button colorScheme="red">Deletar</Button>
-				</ModalFooter>
-			</ModalContent>
-		</Modal>
+export const DeleteSettingModal = ({ isOpen, onClose }) => {
+	const toast = useToast();
+	const router = useRouter();
+
+	const { letter, id } = router.query;
+
+	const { mutate, isSuccess } = useDeleteMachineSettings();
+
+	const handleSuccess = () => {
+		toast({
+			title: "Configuração deletada",
+			status: "error",
+			duration: 5000,
+			isClosable: true,
+		});
+
+		router.push(`/machine/${letter}`);
+	};
+
+	return (
+		<>
+			{isSuccess && handleSuccess()}
+			<Modal isOpen={isOpen} onClose={onClose} isCentered>
+				<ModalOverlay />
+
+				<ModalContent>
+					<ModalHeader>Deletar configuração</ModalHeader>
+					<ModalCloseButton />
+					<ModalBody>
+						<Text>Tem certeza que deseja excluir essa configuração?</Text>
+					</ModalBody>
+					<ModalFooter>
+						<Button onClick={onClose} mr={3}>Cancelar</Button>
+						<Button colorScheme="red" onClick={() => mutate({ name: letter, slug: id.toUpperCase() })}>
+							Deletar
+						</Button>
+					</ModalFooter>
+				</ModalContent>
+			</Modal>
+		</>
 	);
 };
