@@ -60,7 +60,6 @@ describe('<SettingForm />', () => {
 		render(<SettingForm handleSubmitSettingForm={handleSubmitSettingFormMock} />);
 
 		const diametroInput = screen.getByPlaceholderText(/Diametro/i);
-		const PPNCheckbox = screen.getByLabelText(/PPN/i);
 		const OUTROSCheckbox = screen.getByLabelText(/OUTROS/i);
 		const zona1Input = screen.getByPlaceholderText(/Zona 1/i);
 		const zona2Input = screen.getByPlaceholderText(/Zona 2/i);
@@ -76,7 +75,6 @@ describe('<SettingForm />', () => {
 		const producao = screen.getByPlaceholderText(/Produção/i);
 
 		fireEvent.change(diametroInput, { target: { value: 10 } });
-		fireEvent.click(PPNCheckbox);
 		fireEvent.click(OUTROSCheckbox);
 		fireEvent.change(zona1Input, { target: { value: 'Zona 1 teste' } });
 		fireEvent.change(zona2Input, { target: { value: 'Zona 2 teste' } });
@@ -97,7 +95,7 @@ describe('<SettingForm />', () => {
 		expect(handleSubmitSettingFormMock).toHaveBeenCalledTimes(1);
 		expect(handleSubmitSettingFormMock).toHaveBeenCalledWith({
 			diametro: "10",
-			materialCheck: ['PPN', 'OUTROS'],
+			materialCheck: 'OUTROS',
 			zona1: 'Zona 1 teste',
 			zona2: 'Zona 2 teste',
 			zona3: 'Zona 3 teste',

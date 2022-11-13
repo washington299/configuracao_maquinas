@@ -14,8 +14,8 @@ import {
 	NumberInputStepper,
 	NumberIncrementStepper,
 	NumberDecrementStepper,
-	CheckboxGroup,
-	Checkbox,
+	RadioGroup,
+	Radio,
 	Text,
 	Button,
 	useDisclosure,
@@ -58,19 +58,19 @@ export const SettingForm = ({ handleSubmitSettingForm }) => {
 				<VStack w="full" alignItems="normal" spacing={0}>
 					<Text>Material</Text>
 					<Box w="full" border="1px solid" borderColor="gray.300" p={6}>
-						<CheckboxGroup
+						<RadioGroup
 							value={formData.materialCheck}
 							onChange={(value) => setFormData(previousData => ({ ...previousData, materialCheck: value }))}
 						>
 							<SimpleGrid columns={[3, 4, 5, 6]} spacing={4}>
-								<Checkbox value="PPN">PPN</Checkbox>
-								<Checkbox value="PPP">PPP</Checkbox>
-								<Checkbox value="PPZ">PPZ</Checkbox>
-								<Checkbox value="PEADN">PEADN</Checkbox>
-								<Checkbox value="PEADP">PEADP</Checkbox>
-								<Checkbox value="OUTROS">OUTROS</Checkbox>
+								<Radio value="PPN">PPN</Radio>
+								<Radio value="PPP">PPP</Radio>
+								<Radio value="PPZ">PPZ</Radio>
+								<Radio value="PEADN">PEADN</Radio>
+								<Radio value="PEADP">PEADP</Radio>
+								<Radio value="OUTROS">OUTROS</Radio>
 							</SimpleGrid>
-						</CheckboxGroup>
+						</RadioGroup>
 					</Box>
 				</VStack>
 
