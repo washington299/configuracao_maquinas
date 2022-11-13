@@ -23,7 +23,7 @@ import {
 
 import { DeleteSettingModal } from 'components/DeleteSettingModal';
 
-export const SettingForm = () => {
+export const SettingForm = ({ handleSubmitSettingForm }) => {
 	const router = useRouter();
 
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -207,7 +207,9 @@ export const SettingForm = () => {
 				{!router?.query?.create && (
 					<Button colorScheme="red" onClick={onOpen}>Deletar</Button>
 				)}
-				<Button colorScheme="green">Salvar</Button>
+				<Button colorScheme="green" onClick={() => handleSubmitSettingForm(formData)}>
+					Salvar
+				</Button>
 			</HStack>
 		</>
 	);
