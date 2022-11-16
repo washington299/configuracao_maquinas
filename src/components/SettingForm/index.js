@@ -76,18 +76,12 @@ export const SettingForm = ({ handleSubmitSettingForm }) => {
 					<VStack w="full" spacing={6} mt={6}>
 						<FormControl>
 							<FormLabel mb={0}>Diâmetro externo (mm):</FormLabel>
-							<NumberInput
-								min={0}
+							<Input
 								name="diametro"
+								placeholder="Diametro"
 								value={formData.diametro}
-								onChange={(value) => setFormData(previousData => ({ ...previousData, diametro: value }))}
-							>
-								<NumberInputField placeholder="Diametro" />
-								<NumberInputStepper>
-									<NumberIncrementStepper />
-									<NumberDecrementStepper />
-								</NumberInputStepper>
-							</NumberInput>
+								onChange={handleInputFormDataChange}
+							/>
 						</FormControl>
 
 						<VStack w="full" alignItems="normal" spacing={0}>
