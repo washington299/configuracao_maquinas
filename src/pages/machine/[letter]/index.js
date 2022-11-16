@@ -4,7 +4,6 @@ import Link from 'next/link';
 import {
 	Container,
 	Icon,
-	Heading,
 	Spinner,
 	VStack,
 	Text,
@@ -20,6 +19,7 @@ import { createSlugBasedOnString } from 'helpers/parsers';
 
 import { MachineSettingCard } from 'components/MachineSettingCard';
 import { AddSettingsModal } from 'components/AddSettingsModal';
+import { Title } from 'components/Title';
 
 const MachineLetterSettings = () => {
 	const router = useRouter();
@@ -34,9 +34,7 @@ const MachineLetterSettings = () => {
 			<Icon as={ArrowBack} cursor="pointer" onClick={() => router.push('/')} />
 
 			<VStack mb={10} spacing={4}>
-				<Heading as="h1" fontSize="2xl" textAlign="center">
-					Máquina {machineLetter} lista de configurações
-				</Heading>
+				<Title text={`Máquina ${machineLetter} lista de configurações`} />
 
 				<Button
 					colorScheme="blue"

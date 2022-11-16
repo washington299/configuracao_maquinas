@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { Container, Icon, Heading, useToast } from '@chakra-ui/react';
+import { Container, Icon, useToast } from '@chakra-ui/react';
 import { ArrowBack } from '@material-ui/icons';
 
 import { formatSlugToString } from 'helpers/parsers';
@@ -7,6 +7,7 @@ import { formatSlugToString } from 'helpers/parsers';
 import { useAddMachineSettingsData } from 'services/queries';
 
 import { SettingForm } from 'components/SettingForm';
+import { Title } from 'components/Title';
 
 const SettingPage = () => {
 	const router = useRouter();
@@ -43,9 +44,7 @@ const SettingPage = () => {
 
 			<Icon as={ArrowBack} cursor="pointer" onClick={() => router.push(`/machine/${machineLetter}`)} />
 
-			<Heading textAlign="center" fontSize="2xl">
-				Máquina {machineLetter} - {settingId.toUpperCase()}
-			</Heading>
+			<Title text={`Máquina ${machineLetter} - ${settingId.toUpperCase()}`} />
 
 			<SettingForm handleSubmitSettingForm={handleSubmitSettingForm} />
 		</Container>
