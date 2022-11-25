@@ -23,9 +23,9 @@ describe('<MachineLetterTemplate />', () => {
 		expect(push).toHaveBeenCalledWith('/');
 	});
 
-	// it('Should render with correct title', () => {
-	// 	globalRender(<MachineLetterTemplate />);
+	it('Should render with correct title', () => {
+		globalRender(<MachineLetterTemplate />);
 
-	// 	expect(screen.getByRole('heading', { name: /Máquina A lista de configurações/i })).toBeInTheDocument();
-	// });
+		expect(screen.getByRole('heading', { name: /Máquina A lista de configurações/i })).toBeInTheDocument();
+	});
 });
