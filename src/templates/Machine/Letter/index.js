@@ -36,7 +36,7 @@ export const MachineLetterTemplate = () => {
 				onClick={() => router.push('/')}
 			/>
 
-			{/* <VStack mb={10} spacing={4}>
+			<VStack mb={10} spacing={4}>
 				<Title text={`Máquina ${machineLetter} lista de configurações`} />
 
 				<Button
@@ -47,7 +47,7 @@ export const MachineLetterTemplate = () => {
 					Criar nova configuração
 				</Button>
 				<AddSettingsModal isOpen={isOpen} onClose={onClose} />
-			</VStack> */}
+			</VStack>
 
 			{/* {isLoading ? (
 				<VStack mt={10}>
