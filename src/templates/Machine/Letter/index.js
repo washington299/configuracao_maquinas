@@ -27,6 +27,8 @@ export const MachineLetterTemplate = () => {
 
 	const { isOpen, onOpen, onClose } = useDisclosure();
 
+	const { data, isLoading } = useGetMachineSettings(machineLetter);
+
 	return (
 		<Container py={10}>
 			<Icon
@@ -49,9 +51,9 @@ export const MachineLetterTemplate = () => {
 				<AddSettingsModal isOpen={isOpen} onClose={onClose} />
 			</VStack>
 
-			{/* {isLoading ? (
+			{isLoading ? (
 				<VStack mt={10}>
-					<Spinner size="lg" />
+					<Spinner size="lg" data-testid="Spinner" />
 				</VStack>
 			) : (
 				<Fragment>
@@ -69,7 +71,7 @@ export const MachineLetterTemplate = () => {
 						<Text textAlign="center">Essa máquina ainda não possui configurações.</Text>
 					)}
 				</Fragment>
-			)} */}
+			)}
 		</Container>
 	);
 };
