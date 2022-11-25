@@ -7,6 +7,7 @@ export const MachineCard = ({ letter }) => {
 	return (
 		<Link href={`/machine/${letter}`}>
 			<VStack
+				data-testid="Machine card"
 				boxShadow="base"
 				borderRadius="md"
 				p={3}
