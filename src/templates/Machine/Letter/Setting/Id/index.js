@@ -40,7 +40,7 @@ export const MachineLetterSettingId = () => {
 
 	return (
 		<Container py={10}>
-			{/* {isSuccess && handleSuccess()} */}
+			{isSuccess && handleSuccess()}
 
 			<Icon
 				as={ArrowBack}
