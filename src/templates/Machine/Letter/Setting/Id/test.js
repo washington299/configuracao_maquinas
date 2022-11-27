@@ -12,9 +12,11 @@ useRouter.mockImplementation(() => ({
 }));
 
 const mutate = jest.fn();
+let isSuccess = false;
 const useAddMachineSettingsData = jest.spyOn(require('services/queries'), 'useAddMachineSettingsData');
 useAddMachineSettingsData.mockImplementation(() => ({
 	mutate,
+	isSuccess,
 }));
 
 const useGetMachineSettingsData = jest.spyOn(require('services/queries'), 'useGetMachineSettingsData');
@@ -66,5 +68,16 @@ describe('<MachineLetterSettingId />', () => {
 			"zona5": "",
 			"zona6": "",
 		});
+	});
+
+	it('Should show a toast and redirect to correct router when form is submitted successfully', () => {
+		isSuccess = true;
+
+		globalRender(<MachineLetterSettingId />);
+
+		fireEvent.change(screen.getByLabelText(/Diâmetro externo/i), { target: { value: '40 PPN' } });
+		fireEvent.click(screen.getByRole('button', { name: /Salvar/i }));
+
+		expect(push).toHaveBeenCalledWith('/machine/A');
 	});
 });
