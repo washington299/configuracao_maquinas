@@ -9,6 +9,12 @@ describe('createSlugBasedOnString', () => {
 });
 
 describe('formatSlugToString', () => {
+	it('Should return empty string if an invalid value is provided', () => {
+		const response = formatSlugToString();
+
+		expect(response).toBe("");
+	});
+
 	it('Should return a format a slug to string', () => {
 		const response = formatSlugToString('hello-world');
 
