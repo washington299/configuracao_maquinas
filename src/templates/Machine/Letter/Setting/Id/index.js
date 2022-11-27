@@ -13,7 +13,7 @@ export const MachineLetterSettingId = () => {
 	const router = useRouter();
 
 	const machineLetter = router.query.letter;
-	// const settingId = formatSlugToString(router?.query?.id || "");
+	const settingId = formatSlugToString(router?.query?.id);
 
 	// const toast = useToast();
 
@@ -49,9 +49,9 @@ export const MachineLetterSettingId = () => {
 				onClick={() => router.push(`/machine/${machineLetter}`)}
 			/>
 
-			{/* <Title text={`Máquina ${machineLetter} - ${settingId.toUpperCase()}`} />
+			<Title text={`Máquina ${machineLetter} - ${settingId.toUpperCase()}`} />
 
-			<SettingForm handleSubmitSettingForm={handleSubmitSettingForm} /> */}
+			{/* <SettingForm handleSubmitSettingForm={handleSubmitSettingForm} /> */}
 		</Container>
 	)
 };
