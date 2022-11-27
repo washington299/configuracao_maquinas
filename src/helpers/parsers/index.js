@@ -5,6 +5,8 @@ export const createSlugBasedOnString = value => {
 };
 
 export const formatSlugToString = value => {
+	if (!value) return "";
+
 	const slug = value.replace(/-/g, ' ');
 
 	return slug;
