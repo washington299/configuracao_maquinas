@@ -15,28 +15,28 @@ export const MachineLetterSettingId = () => {
 	const machineLetter = router.query.letter;
 	const settingId = formatSlugToString(router?.query?.id);
 
-	// const toast = useToast();
+	const toast = useToast();
 
-	// const { mutate, isSuccess } = useAddMachineSettingsData(router.query.create);
+	const { mutate, isSuccess } = useAddMachineSettingsData(router.query.create);
 
-	// const handleSubmitSettingForm = (values) => {
-	// 	values.extrusora = machineLetter;
-	// 	values.name = machineLetter;
-	// 	values.slug = settingId.toUpperCase();
+	const handleSubmitSettingForm = (values) => {
+		values.extrusora = machineLetter;
+		values.name = machineLetter;
+		values.slug = settingId.toUpperCase();
 
-	// 	mutate(values);
-	// };
+		mutate(values);
+	};
 
-	// const handleSuccess = () => {
-	// 	toast({
-	// 		title: "Configuração salva",
-	// 		status: "success",
-	// 		duration: 5000,
-	// 		isClosable: true,
-	// 	});
+	const handleSuccess = () => {
+		toast({
+			title: "Configuração salva",
+			status: "success",
+			duration: 5000,
+			isClosable: true,
+		});
 
-	// 	router.push(`/machine/${machineLetter}`);
-	// };
+		router.push(`/machine/${machineLetter}`);
+	};
 
 	return (
 		<Container py={10}>
@@ -51,7 +51,7 @@ export const MachineLetterSettingId = () => {
 
 			<Title text={`Máquina ${machineLetter} - ${settingId.toUpperCase()}`} />
 
-			{/* <SettingForm handleSubmitSettingForm={handleSubmitSettingForm} /> */}
+			<SettingForm handleSubmitSettingForm={handleSubmitSettingForm} />
 		</Container>
 	)
 };
