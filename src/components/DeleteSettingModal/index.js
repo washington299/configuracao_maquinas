@@ -1,4 +1,4 @@
-import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 import {
 	Text,
 	Button,
@@ -14,30 +14,26 @@ import {
 
 import { useDeleteMachineSettings } from 'services/queries';
 
-import { formatSlugToString } from 'helpers/parsers';
-
-export const DeleteSettingModal = ({ isOpen, onClose }) => {
+export const DeleteSettingModal = ({ isOpen, onClose, settingId }) => {
 	const toast = useToast();
-	const router = useRouter();
-
-	const { letter, id } = router.query;
 
 	const { mutate, isSuccess } = useDeleteMachineSettings();
 
-	const handleSuccess = () => {
-		toast({
-			title: "Configuração deletada",
-			status: "error",
-			duration: 5000,
-			isClosable: true,
-		});
-
-		router.push(`/machine/${letter}`);
-	};
+	useEffect(() => {
+		if (isSuccess) {
+			toast({
+				title: "Configuração deletada",
+				status: "error",
+				duration: 5000,
+				isClosable: true,
+			});
+			onClose();
+		}
+	}, [isSuccess]);
 
 	return (
 		<>
-			{isSuccess && handleSuccess()}
+			{/* {isSuccess && handleSuccess} */}
 			<Modal isOpen={isOpen} onClose={onClose} isCentered>
 				<ModalOverlay />
 
@@ -49,7 +45,7 @@ export const DeleteSettingModal = ({ isOpen, onClose }) => {
 					</ModalBody>
 					<ModalFooter>
 						<Button onClick={onClose} mr={3}>Cancelar</Button>
-						<Button colorScheme="red" onClick={() => mutate({ name: letter, slug: formatSlugToString(id).toUpperCase() })}>
+						<Button colorScheme="red" onClick={() => mutate({ _id: settingId })}>
 							Deletar
 						</Button>
 					</ModalFooter>
