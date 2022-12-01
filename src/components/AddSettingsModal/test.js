@@ -8,7 +8,7 @@ const query = jest.fn();
 
 useRouter.mockImplementation(() => ({
   push,
-  query,
+  query: { letter: "A" },
   asPath: '',
   route: '/'
 }));
@@ -45,10 +45,10 @@ describe('<AddSettingsModal />', () => {
 		const input = screen.getByLabelText(/Nome da configuração/i);
 		const createButton = screen.getByRole('button', { name: /Criar/i });
 
-		fireEvent.change(input, { target: { value: 'Test' } });
+		fireEvent.change(input, { target: { value: ' Test 1 ' } });
 		fireEvent.click(createButton);
 
 		expect(mockOnClose).toHaveBeenCalledTimes(1);
-		expect(push).toHaveBeenCalledWith(`/machine/${query.letter}/setting/test?create=true`);
+		expect(push).toHaveBeenCalledWith(`/machine/A/setting/test-1?create=true`);
 	});
 });
