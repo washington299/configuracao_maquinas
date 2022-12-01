@@ -1,13 +1,17 @@
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
+
+import { globalRender } from 'tests/helpers';
 
 import { MachineSettingCard } from '.';
 
 describe('<MachineSettingCard />', () => {
 	it('Should render elements correctly', () => {
-		const name = "Name";
+		const setting = { slug: "Name" };
+		const path = "/path";
 
-		render(<MachineSettingCard name={name} />);
+		globalRender(<MachineSettingCard setting={setting} path={path} />);
 
-		expect(screen.getByText(name)).toBeInTheDocument();
+		expect(screen.getByText(setting.slug)).toBeInTheDocument();
+		expect(screen.getByRole('link')).toHaveAttribute('href', path);
 	});
 });
