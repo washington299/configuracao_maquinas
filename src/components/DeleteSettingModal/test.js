@@ -24,12 +24,14 @@ describe('<DeleteSettingModal />', () => {
 	it('Should call mutate with correct params when deleted', () => {
 		isSuccess = true;
 
-		globalRender(<DeleteSettingModal isOpen />);
+		const onCloseMock = jest.fn();
+
+		globalRender(<DeleteSettingModal isOpen onClose={onCloseMock} settingId="123456" />);
 
 		fireEvent.click(screen.getByRole('button', { name: /Deletar/i }));
 
 		expect(mutate).toHaveBeenCalledTimes(1);
-		expect(mutate).toHaveBeenCalledWith({ name: "A", slug: "TESTE 1" });
-		expect(push).toHaveBeenCalledWith("/machine/A");
+		expect(mutate).toHaveBeenCalledWith({ _id: "123456" });
+		expect(onCloseMock).toHaveBeenCalledTimes(1);
 	});
 });
