@@ -28,7 +28,7 @@ export default async (req, res) => {
 			}
 		case 'DELETE':
 			try {
-				await Machine.findOneAndDelete({ name: req.body.name, slug: req.body.slug });
+				await Machine.findOneAndDelete({ _id: req.body._id });
 				return res.status(200).json({ success: true });
 			} catch (error) {
 				return res.status(400).json({ success: false, error });
