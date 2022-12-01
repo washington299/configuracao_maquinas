@@ -10,21 +10,13 @@ import {
 	FormControl,
 	FormLabel,
 	Input,
-	NumberInput,
-	NumberInputField,
-	NumberInputStepper,
-	NumberIncrementStepper,
-	NumberDecrementStepper,
 	RadioGroup,
 	Radio,
 	Text,
 	Button,
-	useDisclosure,
 } from '@chakra-ui/react';
 
 import { useGetMachineSettingsData } from 'services/queries';
-
-import { DeleteSettingModal } from 'components/DeleteSettingModal';
 
 const initialFormState = {
 	diametro: 0,
@@ -44,8 +36,6 @@ const initialFormState = {
 };
 
 export const SettingForm = ({ handleSubmitSettingForm }) => {
-	const { isOpen, onOpen, onClose } = useDisclosure();
-
 	const router = useRouter();
 	const { create, letter, id } = router.query;
 
@@ -71,8 +61,6 @@ export const SettingForm = ({ handleSubmitSettingForm }) => {
 				</VStack>
 			) : (
 				<>
-					<DeleteSettingModal isOpen={isOpen} onClose={onClose} />
-
 					<VStack w="full" spacing={6} mt={6}>
 						<FormControl>
 							<FormLabel mb={0}>Diâmetro externo (mm):</FormLabel>
@@ -233,9 +221,6 @@ export const SettingForm = ({ handleSubmitSettingForm }) => {
 					</VStack>
 
 					<HStack mt={10} justifyContent="flex-end">
-						{!router?.query?.create && (
-							<Button colorScheme="red" onClick={onOpen}>Deletar</Button>
-						)}
 						<Button colorScheme="green" onClick={() => handleSubmitSettingForm(formData)}>
 							Salvar
 						</Button>

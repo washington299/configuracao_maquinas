@@ -35,12 +35,6 @@ describe('<SettingForm />', () => {
 		expect(screen.queryByRole('button', { name: 'Deletar' })).not.toBeInTheDocument();
 	});
 
-	it('Should show delete button if there is create param on url query', () => {
-		globalRender(<SettingForm />);
-
-		expect(screen.getByRole('button', { name: 'Deletar' })).toBeInTheDocument();
-	});
-
 	it('Should change inputs values correct', () => {
 		globalRender(<SettingForm />);
 
