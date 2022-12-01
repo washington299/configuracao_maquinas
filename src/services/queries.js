@@ -1,4 +1,4 @@
-import { useQuery, useMutation } from '@tanstack/react-query';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { api } from './api';
 
@@ -50,5 +50,15 @@ const deleteMachineSettings = async (payload) => {
 	return data;
 }
 
-export const useDeleteMachineSettings = () =>
-	useMutation((payload) => deleteMachineSettings(payload));
+export const useDeleteMachineSettings = () => {
+	const queryClient = useQueryClient();
+
+	return useMutation(
+		(payload) => deleteMachineSettings(payload),
+		{
+			onSuccess: () => {
+				queryClient.invalidateQueries({ queryKey: ['machine'] })
+			}
+		},
+	);
+}
