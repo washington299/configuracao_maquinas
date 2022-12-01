@@ -14,6 +14,8 @@ import {
 
 import { useDeleteMachineSettings } from 'services/queries';
 
+import { formatSlugToString } from 'helpers/parsers';
+
 export const DeleteSettingModal = ({ isOpen, onClose }) => {
 	const toast = useToast();
 	const router = useRouter();
@@ -47,7 +49,7 @@ export const DeleteSettingModal = ({ isOpen, onClose }) => {
 					</ModalBody>
 					<ModalFooter>
 						<Button onClick={onClose} mr={3}>Cancelar</Button>
-						<Button colorScheme="red" onClick={() => mutate({ name: letter, slug: id.toUpperCase() })}>
+						<Button colorScheme="red" onClick={() => mutate({ name: letter, slug: formatSlugToString(id).toUpperCase() })}>
 							Deletar
 						</Button>
 					</ModalFooter>
