@@ -1,6 +1,5 @@
 import { Fragment } from 'react';
 import { useRouter } from 'next/router';
-import Link from 'next/link';
 import {
 	Container,
 	Icon,
@@ -60,11 +59,11 @@ export const MachineLetterTemplate = () => {
 					{data?.data?.length > 0 ? (
 						<SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={8}>
 							{data?.data?.map(setting => (
-								<Link href={`/machine/${machineLetter}/setting/${createSlugBasedOnString(setting.slug)}`} key={setting._id}>
-									<a>
-										<MachineSettingCard name={setting.slug} />
-									</a>
-								</Link>
+								<MachineSettingCard
+									key={setting._id}
+									setting={setting}
+									path={`/machine/${machineLetter}/setting/${createSlugBasedOnString(setting.slug)}`}
+								/>
 							))}
 						</SimpleGrid>
 					) : (
